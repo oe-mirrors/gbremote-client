@@ -1,9 +1,2 @@
 #!/bin/sh
-chmod +x /usr/lib/enigma2/python/gbipbox.so
 chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/client
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/modul_0.so
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/modul_1.so
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/src/exclude
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/src/key_0
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/sourcnum
-chmod +x /usr/lib/enigma2/python/Screens/GBremote.so
