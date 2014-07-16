@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-gbipboxclient
+Version: 1.0
+Description: GigaBlue IPBox Client
+Section: base
+Priority: optional
+Maintainer: X
+License: Proprietary
+Architecture: all
+Depends: enigma2
+

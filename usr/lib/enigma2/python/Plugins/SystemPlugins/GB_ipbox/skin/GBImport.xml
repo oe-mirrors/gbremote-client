@@ -1,0 +1,15 @@
+<screen  flags="wfNoBorder" position="center,0" size="1280,720" title="GBImport" backgroundColor="transparent">
+	<ePixmap position="80,80" size="550,550" pixmap="vsetup.png" zPosition="-1" />
+	<widget font="Regular;35" position="100,100" render="Label" size="508,45" source="Title" halign="center" transparent="1" zPosition="2" backgroundColor="transpBlack" foregroundColor="#0000ff" />    
+	<eLabel backgroundColor="#ffff00" position="100,150" size="510,2" zPosition="2" foregroundColor="#ffff00" />
+	<widget source="key_red" render="Label" position="140,641" size="214,22" font="Regular; 18" halign="center" valign="center" backgroundColor="red" foregroundColor="white" zPosition="10" transparent="1" noWrap="1" text="Cancel" />
+	<ePixmap position="140,640" size="220,25" pixmap="br.png" alphatest="blend" />	
+	<widget source="key_green" render="Label" position="365,641" size="214,22" font="Regular; 18" halign="center" valign="center" backgroundColor="green" foregroundColor="white" zPosition="10" transparent="1" noWrap="1" />
+	<ePixmap position="365,640" size="220,25" pixmap="bg.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="590,641" size="214,22" font="Regular;18" halign="center" valign="center" backgroundColor="yellow" foregroundColor="white" zPosition="10" transparent="1" noWrap="1" />
+	<widget name="pyell" position="590,640" size="220,25" pixmap="by.png" alphatest="blend" />
+	<widget name="list" position="100,160" size="510,450" scrollbarMode="showOnDemand" selectionPixmap="sel_500_25.png" zPosition="1" foregroundColorSelected="#ffff00" transparent="1" backgroundColor="transpBlack" /> 
+	<widget name="activityslider" position="105,580" size="500,5" transparent="1" />
+	<widget name="description" position="105,590" size="120,20" font="Regular;18" halign="left" valign="center" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
+	<widget name="found" position="250,590" size="350,20" font="Regular;18" halign="left" valign="center" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
+</screen>
