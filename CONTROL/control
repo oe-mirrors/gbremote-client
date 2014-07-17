@@ -1,4 +1,4 @@
-Package: enigma2-plugin-extensions-gbipboxclient
+Package: enigma2-plugin-systemplugins-gbipboxclient
 Version: 1.0
 Description: GigaBlue IPBox Client
 Section: base
