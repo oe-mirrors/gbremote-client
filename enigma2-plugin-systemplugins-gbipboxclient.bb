@@ -29,6 +29,7 @@ echo "       GBIPBox Client successfully installed!       "
 echo "                                                    "
 echo "                Restart Enigma2!                    "
 echo "                                                    "
+sleep 10
 exit 0
 }
 
