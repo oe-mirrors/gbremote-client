@@ -6,6 +6,12 @@
 				<listentry caption="Yes, do an automatic scan server IP" step="scan" />
 				<listentry caption="Yes, do a manual insert server IP" step="manualip" />
 			</list>
+                <code>
+self.clearSelectedKeys()
+self.selectKey("OK")
+self.selectKey("UP")
+self.selectKey("DOWN")
+                </code>			
 		</step>
 		<step id="scan" nextstep="end">
 			<text value="Choose GigaBlue server!" />
