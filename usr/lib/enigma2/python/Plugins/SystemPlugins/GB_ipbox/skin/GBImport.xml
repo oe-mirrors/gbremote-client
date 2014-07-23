@@ -11,7 +11,7 @@
 	<widget source="key_blue" render="Label" position="140,671" size="214,22" font="Regular;18" halign="center" valign="center" backgroundColor="yellow" foregroundColor="white" zPosition="10" transparent="1" noWrap="1" />
 	<ePixmap position="140,670" size="220,25" pixmap="bb.png" alphatest="blend" />	
 	<widget name="list" position="100,160" size="510,450" scrollbarMode="showOnDemand" selectionPixmap="sel_500_25.png" zPosition="1" foregroundColorSelected="#ffff00" transparent="1" backgroundColor="transpBlack" /> 
-	<widget name="config" position="100,160" size="510,450" scrollbarMode="showOnDemand" selectionPixmap="sel_500_25.png" zPosition="1" foregroundColorSelected="#ffff00" transparent="1" backgroundColor="transpBlack" /> 
+	<widget name="config" position="100,160" size="510,450"  font="Regular; 20" zPosition="1" transparent="1" backgroundColor="transpBlack" /> 
 	<widget name="activityslider" position="105,580" size="500,5" transparent="1" />
 	<widget name="description" position="105,590" size="120,20" font="Regular;18" halign="left" valign="center" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
 	<widget name="found" position="250,590" size="350,20" font="Regular;18" halign="left" valign="center" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
