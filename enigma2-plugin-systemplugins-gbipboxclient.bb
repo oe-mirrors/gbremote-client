@@ -22,7 +22,6 @@ FILES_${PN} = "/usr/*"
 
 pkg_postinst_${PN}() {
 #!/bin/sh
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/client
 echo "                                                    "
 echo "              GigaBlue IPBox Client                 "
 echo "                                                    "
@@ -36,5 +35,4 @@ exit 0
 
 do_install() {
     cp -rp ${S}/usr ${D}/
-    chmod +x ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/client
 }
