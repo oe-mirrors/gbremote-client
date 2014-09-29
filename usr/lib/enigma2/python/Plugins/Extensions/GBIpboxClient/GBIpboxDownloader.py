@@ -147,7 +147,11 @@ class GBIpboxDownloader:
 		if not data:
 			return
 
-		epgfile = open(config.misc.epgcache_filename.value, "w")
+		try:
+			epgfile = open(config.misc.epgcache_filename.value, "w")
+		except Exception:
+			return
+			
 		epgfile.write(data)
 		epgfile.close()
 		epgcache = eEPGCache.getInstance()
