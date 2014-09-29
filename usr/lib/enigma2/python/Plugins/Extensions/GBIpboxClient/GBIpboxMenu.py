@@ -117,9 +117,10 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 					 transparent="1"
 					 alphatest="on" />
 		</screen>"""
-	def __init__(self, session):
+	def __init__(self, session, timerinstance):
 		self.session = session
 		self.list = []
+		self.timerinstance = timerinstance
 		
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.list)
@@ -163,7 +164,12 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		if config.ipboxclient.auth.value:
 			self.list.append(getConfigListEntry(_("Username"), config.ipboxclient.username))
 			self.list.append(getConfigListEntry(_("Password"), config.ipboxclient.password))
-
+		
+		self.list.append(getConfigListEntry(_("Schedule scan"), config.ipboxclient.schedule))
+		if config.ipboxclient.schedule.getValue():
+			self.list.append(getConfigListEntry(_("Time of scan to start"), config.ipboxclient.scheduletime))
+			self.list.append(getConfigListEntry(_("Repeat how often"), config.ipboxclient.repeattype))
+		
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 		
@@ -180,6 +186,8 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			x[1].save()
 		config.ipboxclient.firstconf.value = True
 		config.ipboxclient.firstconf.save()
+		if self.timerinstance:
+			self.timerinstance.refreshScheduler()
 		self.close()
 
 	def keyCancel(self):

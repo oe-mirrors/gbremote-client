@@ -23,9 +23,16 @@
 from Screens.MessageBox import MessageBox
 
 from GBIpboxMenu import GBIpboxMenu
+from GBIpboxTimer import GBIpboxTimer
 from GBIpboxLocale import _
 
 import os
 
+timerinstance = None
+
 def GBIpboxClient(session, **kwargs):
-	session.open(GBIpboxMenu)
+	session.open(GBIpboxMenu, timerinstance)
+	
+def GBIpboxClientTimer(reason, session=None, **kwargs):
+	global timerinstance
+	timerinstance = GBIpboxTimer(session)
