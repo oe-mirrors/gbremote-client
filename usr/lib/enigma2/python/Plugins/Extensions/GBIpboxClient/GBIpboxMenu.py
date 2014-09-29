@@ -247,7 +247,8 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			downloader.download()
 			self.messagebox.close()
 			self.close()
-		except Exception:
+		except Exception, e:
+			print e
 			self.messagebox.close()
 			self.timer = eTimer()
 			self.timer.callback.append(self.downloadError)

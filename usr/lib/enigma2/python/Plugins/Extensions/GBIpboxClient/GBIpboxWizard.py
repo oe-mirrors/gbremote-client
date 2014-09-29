@@ -203,7 +203,8 @@ class GBIpboxWizard(Wizard):
 		try:
 			downloader.download()
 			self.currStep = self.getStepWithID('end')
-		except Exception:
+		except Exception, e:
+			print e
 			self.currStep = self.getStepWithID('nodownload')
 		self.currStep += 1
 		self.updateValues()
