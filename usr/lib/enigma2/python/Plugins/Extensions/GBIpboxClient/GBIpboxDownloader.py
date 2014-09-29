@@ -116,9 +116,7 @@ class GBIpboxDownloader:
 				isStreaming = False
 				url = ""
 			
-				#if len(tmp) > 1 and tmp[1] == '64':
-				#	isDescription = True
-				if len(tmp) > 1 and tmp[1] == '0':
+				if len(tmp) > 1 and tmp[0] == '1' and tmp[1] == '0':
 					if len(tmp) > 10 and tmp[10].startswith('http%3a//'):
 						isStreaming = True
 					else:
