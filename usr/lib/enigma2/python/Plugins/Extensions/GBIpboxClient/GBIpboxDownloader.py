@@ -112,22 +112,25 @@ class GBIpboxDownloader:
 			outfile.write("#NAME " + bouquet['name'] + "\n")
 			for service in bouquet['services']:
 				tmp = service['reference'].split(':')
-				isDescription = False
+				isDVB = False
 				isStreaming = False
 				url = ""
 			
-				if len(tmp) > 1 and tmp[1] == '64':
-					isDescription = True
-				elif len(tmp) > 1 and tmp[1] == '0':
-					isStreaming = True
-					url = baseurl + ":8001/" + service['reference']
+				#if len(tmp) > 1 and tmp[1] == '64':
+				#	isDescription = True
+				if len(tmp) > 1 and tmp[1] == '0':
+					if len(tmp) > 10 and tmp[10].startswith('http%3a//'):
+						isStreaming = True
+					else:
+						isDVB = True
+						url = baseurl + ":8001/" + service['reference']
 				
-				if isStreaming:
+				if isDVB:
 					outfile.write("#SERVICE " + service['reference'] + urllib.quote(url) + ":" + service['name'] + "\n")
+				elif isStreaming:
+					outfile.write("#SERVICE " + service['reference'] + "\n")
 				else:
 					outfile.write("#SERVICE " + service['reference'] + "\n")
-				
-				if isDescription:
 					outfile.write("#DESCRIPTION " + service['name'] + "\n")
 			outfile.close()
 		bouquetsfile.close()
