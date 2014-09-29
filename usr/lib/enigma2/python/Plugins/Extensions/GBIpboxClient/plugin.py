@@ -25,6 +25,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 
 from GBIpboxClient import GBIpboxClient
+from GBIpboxWizard import GBIpboxWizard
 from GBIpboxLocale import _
 
 config.ipboxclient = ConfigSubsection()
@@ -37,7 +38,7 @@ config.ipboxclient.username = ConfigText(default = "", fixed_size = False)
 config.ipboxclient.password = ConfigText(default = "", fixed_size = False)
 
 def Plugins(**kwargs):
-	return [
+	list = [
 		PluginDescriptor(
 			name = "GBIpboxClient",
 			description = _("Gigablue IPBox network client"),
@@ -45,3 +46,7 @@ def Plugins(**kwargs):
 			fnc = GBIpboxClient
 		)
 	]
+	
+	if not config.ipboxclient.firstconf.value:
+		list.append(PluginDescriptor(name=_("IPBox wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(0, GBIpboxWizard)))
+	return list
