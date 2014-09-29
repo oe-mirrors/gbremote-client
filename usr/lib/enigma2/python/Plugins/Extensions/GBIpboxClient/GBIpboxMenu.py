@@ -31,6 +31,7 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 from GBIpboxDownloader import GBIpboxDownloader
 from GBIpboxScan import GBIpboxScan
 from GBIpboxAbout import GBIpboxAbout
+from GBIpboxMount import GBIpboxMount
 from GBIpboxLocale import _
 
 from enigma import eTimer
@@ -161,6 +162,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("HTTP port"), config.ipboxclient.port))
 		self.list.append(getConfigListEntry(_("Streaming port"), config.ipboxclient.streamport))
 		self.list.append(getConfigListEntry(_("Authentication"), config.ipboxclient.auth))
+		self.list.append(getConfigListEntry(_("Use remote HDD"), config.ipboxclient.mounthdd))
 		if config.ipboxclient.auth.value:
 			self.list.append(getConfigListEntry(_("Username"), config.ipboxclient.username))
 			self.list.append(getConfigListEntry(_("Password"), config.ipboxclient.password))
@@ -188,6 +190,10 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		config.ipboxclient.firstconf.save()
 		if self.timerinstance:
 			self.timerinstance.refreshScheduler()
+			
+		mount = GBIpboxMount(self.session)
+		mount.remount()
+			
 		self.close()
 
 	def keyCancel(self):

@@ -24,7 +24,7 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigClock, ConfigSelection
 
-from GBIpboxClient import GBIpboxClient, GBIpboxClientTimer
+from GBIpboxClient import GBIpboxClient, GBIpboxClientAutostart
 from GBIpboxWizard import GBIpboxWizard
 from GBIpboxLocale import _
 
@@ -39,12 +39,13 @@ config.ipboxclient.password = ConfigText(default = "", fixed_size = False)
 config.ipboxclient.schedule = ConfigYesNo(default = True)
 config.ipboxclient.scheduletime = ConfigClock(default = 0) # 1:00
 config.ipboxclient.repeattype = ConfigSelection(default = "daily", choices = [("daily", _("Daily")), ("weekly", _("Weekly")), ("monthly", _("30 Days"))])
+config.ipboxclient.mounthdd = ConfigYesNo(default = True)
 
 def Plugins(**kwargs):
 	list = [
 		PluginDescriptor(
 			where = PluginDescriptor.WHERE_SESSIONSTART,
-			fnc = GBIpboxClientTimer
+			fnc = GBIpboxClientAutostart
 		),
 		PluginDescriptor(
 			name = "GBIpboxClient",

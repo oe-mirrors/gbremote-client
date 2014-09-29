@@ -24,6 +24,7 @@ from Screens.MessageBox import MessageBox
 
 from GBIpboxMenu import GBIpboxMenu
 from GBIpboxTimer import GBIpboxTimer
+from GBIpboxMount import GBIpboxMount
 from GBIpboxLocale import _
 
 import os
@@ -31,8 +32,13 @@ import os
 timerinstance = None
 
 def GBIpboxClient(session, **kwargs):
+	global timerinstance
 	session.open(GBIpboxMenu, timerinstance)
 	
-def GBIpboxClientTimer(reason, session=None, **kwargs):
+def GBIpboxClientAutostart(reason, session=None, **kwargs):
 	global timerinstance
 	timerinstance = GBIpboxTimer(session)
+	
+	mount = GBIpboxMount(session)
+	mount.automount()
+	
