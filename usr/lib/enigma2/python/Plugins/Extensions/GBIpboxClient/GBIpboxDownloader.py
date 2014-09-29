@@ -59,9 +59,10 @@ class GBIpboxDownloader:
 		baseurl += str(config.ipboxclient.port.value)
 		streamingurl += str(config.ipboxclient.streamport.value)
 		
-		bouquets = self.downloadBouquets(baseurl)
-		self.saveBouquets(bouquets, streamingurl)
-		self.downloadEPG(bouquets, baseurl)
+		for stype in [ "tv", "radio" ]:
+			bouquets = self.downloadBouquets(baseurl, stype)
+			self.saveBouquets(bouquets, streamingurl, '/etc/enigma2/bouquets.' + stype)
+		self.downloadEPG(baseurl)
 		
 	def getEPGLocation(self, baseurl):
 		httprequest = urllib2.urlopen(baseurl + '/web/settings')
@@ -73,9 +74,9 @@ class GBIpboxDownloader:
 			
 		return None
 		
-	def downloadBouquets(self, baseurl):
-		httprequest = urllib2.urlopen(baseurl + '/web/getservices')
+	def downloadBouquets(self, baseurl, stype):
 		bouquets = []
+		httprequest = urllib2.urlopen(baseurl + '/web/bouquets?stype=' + stype)
 		xmldoc = minidom.parseString(httprequest.read())
 		services = xmldoc.getElementsByTagName('e2service') 
 		for service in services:
@@ -97,8 +98,8 @@ class GBIpboxDownloader:
 
 		return bouquets
 
-	def saveBouquets(self, bouquets, baseurl):
-		bouquetsfile = open("/etc/enigma2/bouquets.tv", "w")
+	def saveBouquets(self, bouquets, baseurl, destinationfile):
+		bouquetsfile = open(destinationfile, "w")
 		bouquetsfile.write("#NAME Bouquets (TV)" + "\n")
 		for bouquet in bouquets:
 			pattern = r'"([A-Za-z0-9_\./\\-]*)"'
@@ -136,7 +137,7 @@ class GBIpboxDownloader:
 		db.reloadServicelist()
 		db.reloadBouquets()
 
-	def downloadEPG(self, bouquets, baseurl):
+	def downloadEPG(self, baseurl):
 		filename = self.getEPGLocation(baseurl)
 		if not filename:
 			return
