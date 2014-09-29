@@ -32,6 +32,7 @@ config.ipboxclient.host = ConfigText(default = "", fixed_size = False)
 config.ipboxclient.port = ConfigInteger(default = 80, limits=(1, 65535))
 config.ipboxclient.streamport = ConfigInteger(default = 8001, limits=(1, 65535))
 config.ipboxclient.auth = ConfigYesNo(default=False)
+config.ipboxclient.firstconf = ConfigYesNo(default=False)
 config.ipboxclient.username = ConfigText(default = "", fixed_size = False)
 config.ipboxclient.password = ConfigText(default = "", fixed_size = False)
 

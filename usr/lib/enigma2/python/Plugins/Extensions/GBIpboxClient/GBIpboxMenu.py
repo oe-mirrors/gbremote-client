@@ -141,6 +141,19 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		
 		self.populateMenu()
 		
+		if not config.ipboxclient.firstconf.value:
+			self.timer = eTimer()
+			self.timer.callback.append(self.scanAsk)
+			self.timer.start(100)
+
+	def scanAsk(self):
+		self.timer.stop()
+		self.session.openWithCallback(self.scanConfirm, MessageBox, _("Do you want to scan for a server?"), MessageBox.TYPE_YESNO)
+		
+	def scanConfirm(self, confirmed):
+		if confirmed:
+			self.keyScan()
+			
 	def populateMenu(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Host"), config.ipboxclient.host))
@@ -165,6 +178,8 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 	def keySave(self):
 		for x in self["config"].list:
 			x[1].save()
+		config.ipboxclient.firstconf.value = True
+		config.ipboxclient.firstconf.save()
 		self.close()
 
 	def keyCancel(self):
@@ -212,6 +227,8 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			config.ipboxclient.streamport.save()
 			config.ipboxclient.auth.value = False
 			config.ipboxclient.auth.save()
+			config.ipboxclient.firstconf.value = True
+			config.ipboxclient.firstconf.save()
 			self.populateMenu()
 			
 	def keyDownload(self):
