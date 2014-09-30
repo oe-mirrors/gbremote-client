@@ -167,7 +167,10 @@ class GBIpboxWizard(Wizard):
 		self.updateValues()
 
 	def getScanList(self):
-		devices = self.scanresults
+		devices = []
+		for result in self.scanresults:
+			devices.append((result[0] + ' (' + result[1] + ')', result[1]))
+		
 		devices.append((_('Cancel'), 'cancel'))
 		return devices
 

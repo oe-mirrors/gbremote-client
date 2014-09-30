@@ -223,7 +223,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		if len(self.scanresults) > 0:
 			menulist = []
 			for result in self.scanresults:
-				menulist.append((result[0], result))
+				menulist.append((result[0] + ' (' + result[1] + ')', result))
 			menulist.append((_('Cancel'), None))
 			message = _("Choose your main device")
 			self.session.openWithCallback(self.scanCallback, MessageBox, message, list=menulist)
