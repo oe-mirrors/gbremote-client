@@ -30,6 +30,7 @@ from Tools import Directories
 
 from GBIpboxDownloader import GBIpboxDownloader
 from GBIpboxScan import GBIpboxScan
+from GBIpboxMount import GBIpboxMount
 from GBIpboxLocale import _
 
 from enigma import eTimer
@@ -191,6 +192,10 @@ class GBIpboxWizard(Wizard):
 			config.ipboxclient.auth.save()
 			config.ipboxclient.firstconf.value = True
 			config.ipboxclient.firstconf.save()
+			
+			mount = GBIpboxMount(self.session)
+			mount.remount()
+
 			self.currStep = self.getStepWithID('download')
 		else:
 			self.currStep = self.getStepWithID('welcome')

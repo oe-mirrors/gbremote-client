@@ -26,6 +26,7 @@ from Components.config import config
 import os
 
 mountstate = False
+mounthost = None
 
 class GBIpboxMount:
 	def __init__(self, session):
@@ -36,24 +37,30 @@ class GBIpboxMount:
 		
 	def automount(self):
 		global mountstate
+		global mounthost
 		mountstate = False
+		mounthost = None
 		if config.ipboxclient.mounthdd.value:
 			if self.isMountPoint(self.mountpoint):
 				if not self.umount(self.mountpoint):
 					print 'Cannot umount ' + self.mounpoint
 					return
-			
+					
 			if not self.mount(config.ipboxclient.host.value, self.share, self.mountpoint):
 				print 'Cannot mount ' + config.ipboxclient.host.value + '/' + self.share + ' to ' + self.mountpoint
 			else:
 				mountstate = True
+				mounthost = config.ipboxclient.host.value
 
 	def remount(self):
 		global mountstate
+		global mounthost
 		if mountstate and not config.ipboxclient.mounthdd.value:
 			self.umount(self.mountpoint)
 			mountstate = False
 		elif not mountstate and config.ipboxclient.mounthdd.value:
+			self.automount()
+		elif mountstate and config.ipboxclient.mounthdd.value != mounthost:
 			self.automount()
 	
 	def isMountPoint(self, path):

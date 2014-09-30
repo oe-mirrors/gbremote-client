@@ -242,12 +242,19 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			config.ipboxclient.auth.save()
 			config.ipboxclient.firstconf.value = True
 			config.ipboxclient.firstconf.save()
+			
+			mount = GBIpboxMount(self.session)
+			mount.remount()
+
 			self.populateMenu()
 			
 	def keyDownload(self):
 		for x in self["config"].list:
 			x[1].save()
 			
+		mount = GBIpboxMount(self.session)
+		mount.remount()
+
 		self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.'), MessageBox.TYPE_INFO, enable_input = False)
 		self.timer = eTimer()
 		self.timer.callback.append(self.download)
