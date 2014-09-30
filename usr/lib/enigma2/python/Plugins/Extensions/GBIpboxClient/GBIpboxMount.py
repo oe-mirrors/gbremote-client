@@ -63,5 +63,6 @@ class GBIpboxMount:
 		return os.system('umount ' + path) == 0
 		
 	def mount(self, ip, share, path):
+		os.makedirs(path)
 		return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,username=guest,password= //' + ip + '/' + share + ' ' + path) == 0
 
