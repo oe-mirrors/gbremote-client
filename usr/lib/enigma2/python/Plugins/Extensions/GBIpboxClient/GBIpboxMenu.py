@@ -162,11 +162,10 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("HTTP port"), config.ipboxclient.port))
 		self.list.append(getConfigListEntry(_("Streaming port"), config.ipboxclient.streamport))
 		self.list.append(getConfigListEntry(_("Authentication"), config.ipboxclient.auth))
-		self.list.append(getConfigListEntry(_("Use remote HDD"), config.ipboxclient.mounthdd))
 		if config.ipboxclient.auth.value:
 			self.list.append(getConfigListEntry(_("Username"), config.ipboxclient.username))
 			self.list.append(getConfigListEntry(_("Password"), config.ipboxclient.password))
-		
+		self.list.append(getConfigListEntry(_("Use remote HDD"), config.ipboxclient.mounthdd))		
 		self.list.append(getConfigListEntry(_("Schedule scan"), config.ipboxclient.schedule))
 		if config.ipboxclient.schedule.getValue():
 			self.list.append(getConfigListEntry(_("Time of scan to start"), config.ipboxclient.scheduletime))
