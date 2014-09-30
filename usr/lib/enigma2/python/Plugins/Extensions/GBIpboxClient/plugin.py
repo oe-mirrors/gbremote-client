@@ -41,9 +41,6 @@ config.ipboxclient.scheduletime = ConfigClock(default = 0) # 1:00
 config.ipboxclient.repeattype = ConfigSelection(default = "daily", choices = [("daily", _("Daily")), ("weekly", _("Weekly")), ("monthly", _("30 Days"))])
 config.ipboxclient.mounthdd = ConfigYesNo(default = True)
 
-def ipboxclientMain(session, **kwargs):
-	session.open(GBIpboxClient)
-
 def ipboxclientStart(menuid, **kwargs):
 	if menuid == "mainmenu":
 		return [(_("GBIpboxClient"), GBIpboxClient, "ipbox_client_Start", 13)]
