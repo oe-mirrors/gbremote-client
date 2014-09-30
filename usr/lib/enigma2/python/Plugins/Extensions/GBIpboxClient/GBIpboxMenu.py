@@ -166,9 +166,9 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Username"), config.ipboxclient.username))
 			self.list.append(getConfigListEntry(_("Password"), config.ipboxclient.password))
 		self.list.append(getConfigListEntry(_("Use remote HDD"), config.ipboxclient.mounthdd))		
-		self.list.append(getConfigListEntry(_("Schedule scan"), config.ipboxclient.schedule))
+		self.list.append(getConfigListEntry(_("Schedule sync"), config.ipboxclient.schedule))
 		if config.ipboxclient.schedule.getValue():
-			self.list.append(getConfigListEntry(_("Time of scan to start"), config.ipboxclient.scheduletime))
+			self.list.append(getConfigListEntry(_("Time of sync to start"), config.ipboxclient.scheduletime))
 			self.list.append(getConfigListEntry(_("Repeat how often"), config.ipboxclient.repeattype))
 		
 		self["config"].list = self.list
