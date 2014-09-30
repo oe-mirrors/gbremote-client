@@ -70,6 +70,6 @@ def Plugins(**kwargs):
 			name = _("IPBox wizard"),
 			where = PluginDescriptor.WHERE_WIZARD,
 			needsRestart = False,
-			fnc=(0, GBIpboxWizard)
+			fnc=(30, GBIpboxWizard)
 		))
 	return list
