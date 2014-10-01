@@ -14,7 +14,9 @@ PKGV = "1.0+git${GITPKGV}"
 VER ="1.0"
 PR = "r0"
 
-SRC_URI="git://github.com/openmips/gbremote-client.git"
+RDEPENDS_${PN} = "cifs"
+
+SRC_URI="git://git@gitlab.openmips.com/dev-openmips/gbipboxclient.git;protocol=ssh;branch=4.2-development"
 
 S = "${WORKDIR}/git"
 
@@ -22,7 +24,6 @@ FILES_${PN} = "/usr/*"
 
 pkg_postinst_${PN}() {
 #!/bin/sh
-chmod +x /usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/client
 echo "                                                    "
 echo "              GigaBlue IPBox Client                 "
 echo "                                                    "
@@ -36,5 +37,4 @@ exit 0
 
 do_install() {
     cp -rp ${S}/usr ${D}/
-    chmod +x ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/GB_ipbox/client
 }
