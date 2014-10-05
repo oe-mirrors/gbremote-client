@@ -188,6 +188,10 @@ class GBIpboxDownloader:
 			return
 			
 		print "[GBIpboxClient] remote EPG found at " + filename
+		
+		print "[GBIpboxClient] dump remote EPG to epg.dat"
+		httprequest = urllib2.urlopen(baseurl + '/web/saveepg')
+		
 		httprequest = urllib2.urlopen(baseurl + '/file?action=download&file=' + urllib.quote(filename))
 		data = httprequest.read()
 		if not data:
