@@ -74,18 +74,47 @@ class GBIpboxDownloader:
 		print "[GBIpboxClient] sync EPG"
 		self.downloadEPG(baseurl)
 		
+		print "[GBIpboxClient] sync parental control"
+		self.downloadParentalControl(baseurl)
+		
 		print "[GBIpboxClient] sync is done!"
 		
-	def getEPGLocation(self, baseurl):
+	def getSetting(self, baseurl, key):
 		httprequest = urllib2.urlopen(baseurl + '/web/settings')
 		xmldoc = minidom.parseString(httprequest.read())
 		settings = xmldoc.getElementsByTagName('e2setting') 
 		for setting in settings:
-			if getValueFromNode(setting, 'e2settingname') == 'config.misc.epgcache_filename':
+			if getValueFromNode(setting, 'e2settingname') == key:
 				return getValueFromNode(setting, 'e2settingvalue')
 			
 		return None
 		
+	def getEPGLocation(self, baseurl):
+		return self.getSetting(baseurl, 'config.misc.epgcache_filename')
+		
+	def getParentalControlEnabled(self, baseurl):
+		return self.getSetting(baseurl, 'config.ParentalControl.configured') == 'true'
+		
+	def getParentalControlType(self, baseurl):
+		value = self.getSetting(baseurl, 'config.ParentalControl.type')
+		if not value:
+			value = 'blacklist'
+		return value
+		
+	def downloadParentalControlBouquets(self, baseurl):
+		bouquets = []
+		httprequest = urllib2.urlopen(baseurl + '/web/parentcontrollist')
+		xmldoc = minidom.parseString(httprequest.read())
+		services = xmldoc.getElementsByTagName('e2service') 
+		for service in services:
+			bouquet = {}
+			bouquet['reference'] = getValueFromNode(service, 'e2servicereference')
+			bouquet['name'] = getValueFromNode(service, 'e2servicename')
+
+			bouquets.append(bouquet)
+
+		return bouquets
+
 	def downloadBouquets(self, baseurl, stype):
 		bouquets = []
 		httprequest = urllib2.urlopen(baseurl + '/web/bouquets?stype=' + stype)
@@ -93,8 +122,8 @@ class GBIpboxDownloader:
 		services = xmldoc.getElementsByTagName('e2service') 
 		for service in services:
 			bouquet = {}
-			bouquet['reference'] = service.getElementsByTagName('e2servicereference')[0].firstChild.nodeValue
-			bouquet['name'] = service.getElementsByTagName('e2servicename')[0].firstChild.nodeValue
+			bouquet['reference'] = getValueFromNode(service, 'e2servicereference')
+			bouquet['name'] = getValueFromNode(service, 'e2servicename')
 			bouquet['services'] = [];
 
 			httprequest = urllib2.urlopen(baseurl + '/web/getservices?' + urllib.urlencode({'sRef': bouquet['reference']}))
@@ -102,8 +131,8 @@ class GBIpboxDownloader:
 			services2 = xmldoc2.getElementsByTagName('e2service') 
 			for service2 in services2:
 				bouquet['services'].append({
-					'reference': service2.getElementsByTagName('e2servicereference')[0].firstChild.nodeValue,
-					'name': service2.getElementsByTagName('e2servicename')[0].firstChild.nodeValue
+					'reference': getValueFromNode(service2, 'e2servicereference'),
+					'name': getValueFromNode(service2, 'e2servicename')
 				})
 
 			bouquets.append(bouquet)
@@ -178,3 +207,28 @@ class GBIpboxDownloader:
 		epgcache = eEPGCache.getInstance()
 		epgcache.load()
 		
+	def downloadParentalControl(self, baseurl):
+		print "[GBIpboxClient] reading remote parental control status ..."
+		status = self.getEPGLocation(baseurl)
+		config.ParentalControl.configured.value = status
+		config.ParentalControl.configured.save()
+		
+		if status:
+			print "[GBIpboxClient] parental control enabled"
+			print "[GBIpboxClient] reading remote parental control type ..."
+			stype = self.getParentalControlType(baseurl)
+			print "[GBIpboxClient] parental control type is " + stype
+			config.ParentalControl.type.value = stype
+			config.ParentalControl.type.save()
+			print "[GBIpboxClient] download parental control services list"
+			services = self.downloadParentalControlBouquets(baseurl)
+			print "[GBIpboxClient] save parental control services list"
+			parentalfile = open("/etc/enigma2/" + stype, "w")
+			for service in services:
+				parentalfile.write(service['reference'] + "\n")
+			parentalfile.close()
+			print "[GBIpboxClient] reload parental control"
+			from Components.ParentalControl import parentalControl
+			parentalControl.open()
+		else:
+			print "[GBIpboxClient] parental control disabled"
