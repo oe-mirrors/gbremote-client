@@ -62,7 +62,8 @@ class GBIpboxScan:
 	def scan(self):
 		devices = []
 		for key in iNetwork.ifaces:
-			devices += self.scanNetwork(iNetwork.ifaces[key]['ip'], iNetwork.ifaces[key]['netmask'])
+			if iNetwork.ifaces[key]['up']:
+				devices += self.scanNetwork(iNetwork.ifaces[key]['ip'], iNetwork.ifaces[key]['netmask'])
 		return devices
 		
 	def ipRange(self, start_ip, end_ip):
