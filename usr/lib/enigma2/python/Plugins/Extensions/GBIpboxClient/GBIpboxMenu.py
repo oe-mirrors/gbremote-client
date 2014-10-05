@@ -193,8 +193,11 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		mount = GBIpboxMount(self.session)
 		mount.remount()
 			
-		self.close()
-
+		self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.'), MessageBox.TYPE_INFO, enable_input = False)
+		self.timer = eTimer()
+		self.timer.callback.append(self.download)
+		self.timer.start(100)
+	
 	def keyCancel(self):
 		for x in self["config"].list:
 			x[1].cancel()
@@ -248,18 +251,6 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 
 			self.populateMenu()
 			
-	#def keyDownload(self):
-	#	for x in self["config"].list:
-	#		x[1].save()
-	#		
-	#	mount = GBIpboxMount(self.session)
-	#	mount.remount()
-
-	#	self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.'), MessageBox.TYPE_INFO, enable_input = False)
-	#	self.timer = eTimer()
-	#	self.timer.callback.append(self.download)
-	#	self.timer.start(100)
-		
 	def download(self):
 		self.timer.stop()
 		downloader = GBIpboxDownloader(self.session)
