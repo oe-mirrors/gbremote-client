@@ -41,19 +41,21 @@ self.close()
 
 		<step id="nodevices">
 			<text value="No devices found! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard." />
+			<list>
+				<listentry caption="Try to scan again" step="scan" />
+				<listentry caption="Abort this Wizard" step="abort" />
+			</list>
 			<code>
-			</code>
-			<code pos="after">
-self.close()
 			</code>
 		</step>
 		
 		<step id="nodownload">
 			<text value="Cannot download data! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard." />
+			<list>
+				<listentry caption="Try to download again" step="download" />
+				<listentry caption="Abort this Wizard" step="abort" />
+			</list>
 			<code>
-			</code>
-			<code pos="after">
-self.close()
 			</code>
 		</step>
 		
