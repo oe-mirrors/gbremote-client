@@ -128,15 +128,15 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		
 		self.setTitle(_('GBIpbox Client'))
 		
-		self["key_red"] = Button(_('Save'))
-		self["key_green"] = Button(_('Sync'))
+		self["key_red"] = Button(_('Cancel'))
+		self["key_green"] = Button(_('Save'))
 		self["key_yellow"] = Button(_('Scan'))
 		self["key_blue"] = Button(_('About'))
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"cancel": self.keyCancel,
-			"red": self.keySave,
-			"green": self.keyDownload,
+			"red": self.keyCancel,
+			"green": self.keySave,
 			"yellow": self.keyScan,
 			"blue": self.keyAbout
 		}, -2)
@@ -248,17 +248,17 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 
 			self.populateMenu()
 			
-	def keyDownload(self):
-		for x in self["config"].list:
-			x[1].save()
-			
-		mount = GBIpboxMount(self.session)
-		mount.remount()
+	#def keyDownload(self):
+	#	for x in self["config"].list:
+	#		x[1].save()
+	#		
+	#	mount = GBIpboxMount(self.session)
+	#	mount.remount()
 
-		self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.'), MessageBox.TYPE_INFO, enable_input = False)
-		self.timer = eTimer()
-		self.timer.callback.append(self.download)
-		self.timer.start(100)
+	#	self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.'), MessageBox.TYPE_INFO, enable_input = False)
+	#	self.timer = eTimer()
+	#	self.timer.callback.append(self.download)
+	#	self.timer.start(100)
 		
 	def download(self):
 		self.timer.stop()
