@@ -59,10 +59,22 @@ class GBIpboxDownloader:
 		baseurl += str(config.ipboxclient.port.value)
 		streamingurl += str(config.ipboxclient.streamport.value)
 		
+		print "[GBIpboxClient] web interface url: " + baseurl
+		print "[GBIpboxClient] streaming url: " + streamingurl
+		
 		for stype in [ "tv", "radio" ]:
+			print "[GBIpboxClient] download " + stype + " bouquets"
 			bouquets = self.downloadBouquets(baseurl, stype)
+			print "[GBIpboxClient] save " + stype + " bouquets"
 			self.saveBouquets(bouquets, streamingurl, '/etc/enigma2/bouquets.' + stype)
+			
+		print "[GBIpboxClient] reload bouquets"
+		self.reloadBouquets()
+		
+		print "[GBIpboxClient] sync EPG"
 		self.downloadEPG(baseurl)
+		
+		print "[GBIpboxClient] sync is done!"
 		
 	def getEPGLocation(self, baseurl):
 		httprequest = urllib2.urlopen(baseurl + '/web/settings')
@@ -133,27 +145,36 @@ class GBIpboxDownloader:
 					outfile.write("#DESCRIPTION " + service['name'] + "\n")
 			outfile.close()
 		bouquetsfile.close()
+		
+	def reloadBouquets(self):
 		db = eDVBDB.getInstance()
 		db.reloadServicelist()
 		db.reloadBouquets()
 
 	def downloadEPG(self, baseurl):
+		print "[GBIpboxClient] reading remote EPG location ..."
 		filename = self.getEPGLocation(baseurl)
 		if not filename:
+			print "[GBIpboxClient] error downloading remote EPG location. Skip EPG sync."
 			return
 			
+		print "[GBIpboxClient] remote EPG found at " + filename
 		httprequest = urllib2.urlopen(baseurl + '/file?action=download&file=' + urllib.quote(filename))
 		data = httprequest.read()
 		if not data:
+			print "[GBIpboxClient] cannot download remote EPG. Skip EPG sync."
 			return
 
 		try:
 			epgfile = open(config.misc.epgcache_filename.value, "w")
 		except Exception:
+			print "[GBIpboxClient] cannot save EPG. Skip EPG sync."
 			return
 			
 		epgfile.write(data)
 		epgfile.close()
+		
+		print "[GBIpboxClient] reload EPG"
 		epgcache = eEPGCache.getInstance()
 		epgcache.load()
 		
