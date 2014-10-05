@@ -14,7 +14,7 @@ PKGV = "1.0+git${GITPKGV}"
 VER ="1.0"
 PR = "r0"
 
-SRC_URI="git://git@gitlab.openmips.com/dev-openmips/gbipboxclient.git;protocol=ssh
+SRC_URI="git://git@gitlab.openmips.com/dev-openmips/gbipboxclient.git;protocol=ssh"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
