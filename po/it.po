@@ -17,39 +17,39 @@ msgstr ""
 
 #: ../src/plugin.py:41
 msgid "30 Days"
-msgstr ""
+msgstr "30 Giorni"
 
 #: ../src/GBIpboxMenu.py:134
 msgid "About"
-msgstr ""
+msgstr "Informazioni"
 
 #: ../src/GBIpboxMenu.py:164
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticazione"
 
 #: ../src/GBIpboxMenu.py:131 ../src/GBIpboxMenu.py:230 ../src/GBIpboxWizard.py:175
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: ../src/GBIpboxMenu.py:276
 msgid "Cannot download data. Please check your configuration"
-msgstr ""
+msgstr "Impossibile scaricare i dati. Controllare la configurazione"
 
 #: ../src/GBIpboxMenu.py:231
 msgid "Choose your main device"
-msgstr ""
+msgstr "Scegli il tuo dispositivo principale"
 
 #: ../src/plugin.py:41
 msgid "Daily"
-msgstr ""
+msgstr "Giornaliera"
 
 #: ../src/GBIpboxMenu.py:153
 msgid "Do you want to scan for a server?"
-msgstr ""
+msgstr "Vuoi eseguire una ricerca del server?"
 
 #: ../src/GBIpboxMenu.py:272
 msgid "Download completed"
-msgstr ""
+msgstr "Download completato"
 
 #: ../src/GBIpboxMenu.py:129 ../src/GBIpboxWizard.py:146
 msgid "GBIpbox Client"
@@ -69,11 +69,11 @@ msgstr ""
 
 #: ../src/GBIpboxMenu.py:162
 msgid "HTTP port"
-msgstr ""
+msgstr "Porta HTTP"
 
 #: ../src/GBIpboxMenu.py:161
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 #: ../src/plugin.py:70
 msgid "IPBox wizard"
@@ -81,100 +81,100 @@ msgstr ""
 
 #: ../src/GBIpboxMenu.py:234
 msgid "No devices found"
-msgstr ""
+msgstr "Nessun dispositivo trovato"
 
 #: ../src/GBIpboxMenu.py:167
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: ../src/GBIpboxMenu.py:196
 msgid "Please wait while download is in progress."
-msgstr ""
+msgstr "Attendere, download in corso."
 
 #: ../src/GBIpboxMenu.py:210
 msgid "Please wait while scan is in progress.\\nThis operation may take a while"
-msgstr ""
+msgstr "Attendere, scansione in corso.\\nL'operazione potrebbe richiedere molto tempo."
 
 #: ../src/GBIpboxMenu.py:172
 msgid "Repeat how often"
-msgstr ""
+msgstr "Frequenza di ripetizione"
 
 #: ../src/GBIpboxMenu.py:132
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: ../src/GBIpboxMenu.py:133
 msgid "Scan"
-msgstr ""
+msgstr "Scansiona"
 
 #: ../src/GBIpboxMenu.py:169
 msgid "Schedule sync"
-msgstr ""
+msgstr "Sincronizzazione pianificata"
 
 #: ../src/GBIpboxMenu.py:163
 msgid "Streaming port"
-msgstr ""
+msgstr "Porta di streaming"
 
 #: ../src/GBIpboxMenu.py:171
 msgid "Time of sync to start"
-msgstr ""
+msgstr "Ora di inizio della sincronizzazione"
 
 #: ../src/GBIpboxMenu.py:168
 msgid "Use remote HDD"
-msgstr ""
+msgstr "Utilizza hard disk remoto"
 
 #: ../src/GBIpboxMenu.py:166
 msgid "Username"
-msgstr ""
+msgstr "Nome utente"
 
 #: ../src/plugin.py:41
 msgid "Weekly"
-msgstr ""
+msgstr "Settimanale"
 
 #: ../src/gbipboxwizard.xml
 msgid "Abort this Wizard"
-msgstr ""
+msgstr "Termina questo Wizard"
 
 #: ../src/gbipboxwizard.xml
 msgid "Cannot download data! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
-msgstr ""
+msgstr "Impossibile scaricare i dati! Spiacente, non possiamo configurare il tuo ipbox ora\nPremi OK per chiudere questo Wizard."
 
 #: ../src/gbipboxwizard.xml
 msgid "Choose your main device"
-msgstr ""
+msgstr "Scegli il tuo dispositivo principale"
 
 #: ../src/gbipboxwizard.xml
 msgid "No devices found! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
-msgstr ""
+msgstr "Nessun dispositivo trovato! Spiacente, non possiamo configurare il tuo ipbox ora\nPremi OK per chiudere questo Wizard."
 
 #: ../src/gbipboxwizard.xml
 msgid "Please wait while download is in progress."
-msgstr ""
+msgstr "Attendere, download in corso."
 
 #: ../src/gbipboxwizard.xml
 msgid "Please wait while scan is in progress.\nThis operation may take a while."
-msgstr ""
+msgstr "Attendere, scansione in corso.\nL'operazione potrebbe richiedere molto tempo."
 
 #: ../src/gbipboxwizard.xml
 msgid "Scan for a server"
-msgstr ""
+msgstr "Cerca un server"
 
 #: ../src/gbipboxwizard.xml
 msgid "Thank you for using the wizard. Your ipbox is now configured.\nPlease press OK to continue."
-msgstr ""
+msgstr "Grazie per aver utilizzato il wizard. Il tuo ipbox è configurato\nPremere OK per continuare."
 
 #: ../src/gbipboxwizard.xml
 msgid "Try to download again"
-msgstr ""
+msgstr "Riprova a scaricare"
 
 #: ../src/gbipboxwizard.xml
 msgid "Try to scan again"
-msgstr ""
+msgstr "Riesegui la ricerce"
 
 #: ../src/gbipboxwizard.xml
 msgid "Welcome.\n\nThis Wizard will help you to configure your ipbox."
-msgstr ""
+msgstr "Benvenuto.\n\nQuesto Wizard ti aiuterà a configurare il tuo ipbox."
 
 #: ../src/gbipboxwizard.xml
 msgid "Your ipbox is not configured.\nPlease press OK to close this Wizard."
-msgstr ""
+msgstr "Il tuo ipbox non è configurato.\nPremi Ok per chiudere questo Wizard."
