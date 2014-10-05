@@ -1,0 +1,48 @@
+
+#: ../src/gbipboxwizard.xml
+msgid "Abort this Wizard"
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Cannot download data! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Choose your main device"
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "No devices found! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Please wait while download is in progress."
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Please wait while scan is in progress.\nThis operation may take a while."
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Scan for a server"
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Thank you for using the wizard. Your ipbox is now configured.\nPlease press OK to continue."
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Try to download again"
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Try to scan again"
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Welcome.\n\nThis Wizard will help you to configure your ipbox."
+msgstr ""
+
+#: ../src/gbipboxwizard.xml
+msgid "Your ipbox is not configured.\nPlease press OK to close this Wizard."
+msgstr ""

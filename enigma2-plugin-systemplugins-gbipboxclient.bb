@@ -1,7 +1,7 @@
 SUMMARY = "GigaBlue IPBox Client"
 MAINTAINER = "GigaBlue"
 SECTION = "base"
-LICENSE = "proprietary"
+LICENSE = "GPLv2"
 PACKAGE_ARCH = "all"
 
 require conf/license/license-gplv2.inc
@@ -14,27 +14,47 @@ PKGV = "1.0+git${GITPKGV}"
 VER ="1.0"
 PR = "r0"
 
-RDEPENDS_${PN} = "cifs"
-
-SRC_URI="git://git@gitlab.openmips.com/dev-openmips/gbipboxclient.git;protocol=ssh;branch=4.2-development"
-
+SRC_URI="git://git@gitlab.openmips.com/dev-openmips/gbipboxclient.git;protocol=ssh
 S = "${WORKDIR}/git"
 
-FILES_${PN} = "/usr/*"
+inherit autotools-brokensep
 
-pkg_postinst_${PN}() {
-#!/bin/sh
-echo "                                                    "
-echo "              GigaBlue IPBox Client                 "
-echo "                                                    "
-echo "       GBIPBox Client successfully installed!       "
-echo "                                                    "
-echo "                Restart Enigma2!                    "
-echo "                                                    "
-sleep 10
-exit 0
+DEPENDS = "python"
+RDEPENDS_${PN} = "cifs"
+
+EXTRA_OECONF = "\
+    --with-po \
+    BUILD_SYS=${BUILD_SYS} \
+    HOST_SYS=${HOST_SYS} \
+    STAGING_INCDIR=${STAGING_INCDIR} \
+    STAGING_LIBDIR=${STAGING_LIBDIR} \
+    "
+
+do_install_append() {
+    # remove unused .pyc files
+    find ${D}/usr/lib/enigma2/python/Plugins/Extensions/${PLUGIN}/ -name '*.pyc' -exec rm {} \;
+    
+    # remove helper .pyo file
+    find ${D}/usr/lib/enigma2/python/Plugins/Extensions/${PLUGIN}/ -name '*helper.pyo' -exec rm {} \;
 }
 
-do_install() {
-    cp -rp ${S}/usr ${D}/
+# skip this!
+install_egg_info() {
+}
+
+do_configure_prepend() {
+    touch ${S}/NEWS
+    touch ${S}/README
+    touch ${S}/AUTHORS
+    touch ${S}/ChangeLog
+}
+
+python populate_packages_prepend() {
+    enigma2_plugindir = bb.data.expand('${libdir}/enigma2/python/Plugins', d)
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/[a-zA-Z0-9_]+.*$', 'enigma2-plugin-%s', '%s', recursive=True, match_path=True, prepend=True, extra_depends="enigma2")
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(?!.*helper\.py).*\.py$', 'enigma2-plugin-%s-src', '%s (source files)', recursive=True, match_path=True, prepend=True)
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.la$', 'enigma2-plugin-%s-dev', '%s (development)', recursive=True, match_path=True, prepend=True)
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\.a$', 'enigma2-plugin-%s-staticdev', '%s (static development)', recursive=True, match_path=True, prepend=True)
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/(.*/)?\.debug/.*$', 'enigma2-plugin-%s-dbg', '%s (debug)', recursive=True, match_path=True, prepend=True)
+    do_split_packages(d, enigma2_plugindir, '^(\w+/\w+)/.*\/.*\.po$', 'enigma2-plugin-%s-po', '%s (translations)', recursive=True, match_path=True, prepend=True)
 }
