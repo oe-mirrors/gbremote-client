@@ -140,10 +140,6 @@ msgid "Cannot download data! Sorry, we can't configure your ipbox right now.\nPl
 msgstr "Impossibile scaricare i dati! Spiacente, non possiamo configurare il tuo ipbox ora\nPremi OK per chiudere questo Wizard."
 
 #: ../src/gbipboxwizard.xml
-msgid "Choose your main device"
-msgstr "Scegli il tuo dispositivo principale"
-
-#: ../src/gbipboxwizard.xml
 msgid "No devices found! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
 msgstr "Nessun dispositivo trovato! Spiacente, non possiamo configurare il tuo ipbox ora\nPremi OK per chiudere questo Wizard."
 
