@@ -6,7 +6,7 @@ EXTRA_DIST = $(LANGPO)
 
 if UPDATE_PO
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
-gbipboxclient.pot: $(top_srcdir)/src/*.py
+gbipboxclient-py.pot: $(top_srcdir)/src/*.py
 	$(XGETTEXT) --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d @PACKAGE_NAME@ -s -o $@ $^
 
 gbipboxclient.pot: gbipboxclient-py.pot
