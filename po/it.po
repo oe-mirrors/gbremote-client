@@ -144,10 +144,6 @@ msgid "No devices found! Sorry, we can't configure your ipbox right now.\nPlease
 msgstr "Nessun dispositivo trovato! Spiacente, non possiamo configurare il tuo ipbox ora\nPremi OK per chiudere questo Wizard."
 
 #: ../src/gbipboxwizard.xml
-msgid "Please wait while download is in progress."
-msgstr "Attendere, download in corso."
-
-#: ../src/gbipboxwizard.xml
 msgid "Please wait while scan is in progress.\nThis operation may take a while."
 msgstr "Attendere, scansione in corso.\nL'operazione potrebbe richiedere molto tempo."
 

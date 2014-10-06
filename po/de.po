@@ -144,10 +144,6 @@ msgid "No devices found! Sorry, we can't configure your ipbox right now.\nPlease
 msgstr ""
 
 #: ../src/gbipboxwizard.xml
-msgid "Please wait while download is in progress."
-msgstr ""
-
-#: ../src/gbipboxwizard.xml
 msgid "Please wait while scan is in progress.\nThis operation may take a while."
 msgstr ""
 
