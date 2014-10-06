@@ -6,7 +6,7 @@ PACKAGE_ARCH = "all"
 
 require conf/license/license-gplv2.inc
 
-inherit gitpkgv
+inherit gitpkgv pythonnative
 
 SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
