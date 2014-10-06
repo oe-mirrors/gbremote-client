@@ -145,7 +145,7 @@ msgstr "Keine Geräte gefunden! Es tut uns leid, aber Wir können Ihre IPbox mom
 
 #: ../src/gbipboxwizard.xml
 msgid "Please wait while scan is in progress.\nThis operation may take a while."
-msgstr "Bitte warten Sie während der Suchlauf läuft.\Dieser Vorgang kann etwas dauern."
+msgstr "Bitte warten Sie während der Suchlauf läuft.\nDieser Vorgang kann etwas dauern."
 
 #: ../src/gbipboxwizard.xml
 msgid "Scan for a server"
