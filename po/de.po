@@ -17,39 +17,39 @@ msgstr ""
 
 #: ../src/plugin.py:41
 msgid "30 Days"
-msgstr ""
+msgstr "30 Tage"
 
 #: ../src/GBIpboxMenu.py:134
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: ../src/GBIpboxMenu.py:164
 msgid "Authentication"
-msgstr ""
+msgstr "Authentifizierung"
 
 #: ../src/GBIpboxMenu.py:131 ../src/GBIpboxMenu.py:230 ../src/GBIpboxWizard.py:175
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: ../src/GBIpboxMenu.py:276
 msgid "Cannot download data. Please check your configuration"
-msgstr ""
+msgstr "Daten können nicht geladen werden. Bitte Konfiguration prüfen"
 
 #: ../src/GBIpboxMenu.py:231
 msgid "Choose your main device"
-msgstr ""
+msgstr "Gerät wählen"
 
 #: ../src/plugin.py:41
 msgid "Daily"
-msgstr ""
+msgstr "Täglich"
 
 #: ../src/GBIpboxMenu.py:153
 msgid "Do you want to scan for a server?"
-msgstr ""
+msgstr "Nach einem Gerät suchen?"
 
 #: ../src/GBIpboxMenu.py:272
 msgid "Download completed"
-msgstr ""
+msgstr "Herunterladen beendet"
 
 #: ../src/GBIpboxMenu.py:129 ../src/GBIpboxWizard.py:146
 msgid "GBIpbox Client"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: ../src/GBIpboxAbout.py:44
 msgid "GBIpbox Client About"
-msgstr ""
+msgstr "Über GBIpbox Client"
 
 #: ../src/plugin.py:46
 msgid "GBIpboxClient"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../src/GBIpboxMenu.py:162
 msgid "HTTP port"
-msgstr ""
+msgstr "HTTP Port"
 
 #: ../src/GBIpboxMenu.py:161
 msgid "Host"
@@ -77,96 +77,231 @@ msgstr ""
 
 #: ../src/plugin.py:70
 msgid "IPBox wizard"
-msgstr ""
+msgstr "IPBox Assistent"
 
 #: ../src/GBIpboxMenu.py:234
 msgid "No devices found"
-msgstr ""
+msgstr "kein Gerät gefunden"
 
 #: ../src/GBIpboxMenu.py:167
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: ../src/GBIpboxMenu.py:196
 msgid "Please wait while download is in progress."
-msgstr ""
+msgstr "Es wird heruntergeladen. Bitte warten."
 
 #: ../src/GBIpboxMenu.py:210
 msgid "Please wait while scan is in progress.\\nThis operation may take a while"
-msgstr ""
+msgstr "Es wird gesucht.\\nDas kann etwas dauern"
 
 #: ../src/GBIpboxMenu.py:172
 msgid "Repeat how often"
-msgstr ""
+msgstr "Wiederholung wie oft"
 
 #: ../src/GBIpboxMenu.py:132
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: ../src/GBIpboxMenu.py:133
 msgid "Scan"
-msgstr ""
+msgstr "Suchen"
 
 #: ../src/GBIpboxMenu.py:169
 msgid "Schedule sync"
-msgstr ""
+msgstr "Plane Synchronisierung"
 
 #: ../src/GBIpboxMenu.py:163
 msgid "Streaming port"
-msgstr ""
+msgstr "Streaming Port"
 
 #: ../src/GBIpboxMenu.py:171
 msgid "Time of sync to start"
-msgstr ""
+msgstr "Startzeit Synchronisierung"
 
 #: ../src/GBIpboxMenu.py:168
 msgid "Use remote HDD"
-msgstr ""
+msgstr "Entfernte Festplatte benutzen"
 
 #: ../src/GBIpboxMenu.py:166
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: ../src/plugin.py:41
 msgid "Weekly"
-msgstr ""
+msgstr "Wöchentlich"
 
 #: ../src/gbipboxwizard.xml
 msgid "Abort this Wizard"
+msgstr "# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:41
+msgid "30 Days"
+msgstr "30 Tage"
+
+#: ../src/GBIpboxMenu.py:134
+msgid "About"
+msgstr "Über"
+
+#: ../src/GBIpboxMenu.py:164
+msgid "Authentication"
+msgstr "Authentifizierung"
+
+#: ../src/GBIpboxMenu.py:131 ../src/GBIpboxMenu.py:230 ../src/GBIpboxWizard.py:175
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../src/GBIpboxMenu.py:276
+msgid "Cannot download data. Please check your configuration"
+msgstr "Daten können nicht geladen werden. Bitte Konfiguration prüfen"
+
+#: ../src/GBIpboxMenu.py:231
+msgid "Choose your main device"
+msgstr "Gerät wählen"
+
+#: ../src/plugin.py:41
+msgid "Daily"
+msgstr "Täglich"
+
+#: ../src/GBIpboxMenu.py:153
+msgid "Do you want to scan for a server?"
+msgstr "Nach einem Gerät suchen?"
+
+#: ../src/GBIpboxMenu.py:272
+msgid "Download completed"
+msgstr "Herunterladen beendet"
+
+#: ../src/GBIpboxMenu.py:129 ../src/GBIpboxWizard.py:146
+msgid "GBIpbox Client"
+msgstr "GBIpbox Client"
+
+#: ../src/GBIpboxAbout.py:44
+msgid "GBIpbox Client About"
+msgstr "Über GBIpbox Client"
+
+#: ../src/plugin.py:46
+msgid "GBIpboxClient"
+msgstr "GBIpboxClient"
+
+#: ../src/plugin.py:58 ../src/plugin.py:64
+msgid "Gigablue IPBox network client"
+msgstr "Gigablue IPBox Netzwerkclient"
+
+#: ../src/GBIpboxMenu.py:162
+msgid "HTTP port"
+msgstr "HTTP Port"
+
+#: ../src/GBIpboxMenu.py:161
+msgid "Host"
+msgstr "Host"
+
+#: ../src/plugin.py:70
+msgid "IPBox wizard"
+msgstr "IPBox Assistent"
+
+#: ../src/GBIpboxMenu.py:234
+msgid "No devices found"
+msgstr "Kein Gerät gefunden"
+
+#: ../src/GBIpboxMenu.py:167
+msgid "Password"
+msgstr "Passwort"
+
+#: ../src/GBIpboxMenu.py:196
+msgid "Please wait while download is in progress."
+msgstr "Es wird heruntergeladen. Bitte warten."
+
+#: ../src/GBIpboxMenu.py:210
+msgid "Please wait while scan is in progress.\\nThis operation may take a while"
+msgstr "Es wird gesucht.\\nDas kann etwas dauern"
+
+#: ../src/GBIpboxMenu.py:172
+msgid "Repeat how often"
+msgstr "Wiederholung wie oft"
+
+#: ../src/GBIpboxMenu.py:132
+msgid "Save"
+msgstr "Speichern"
+
+#: ../src/GBIpboxMenu.py:133
+msgid "Scan"
+msgstr "Suchen"
+
+#: ../src/GBIpboxMenu.py:169
+msgid "Schedule sync"
+msgstr "Plane Synchronisierung"
+
+#: ../src/GBIpboxMenu.py:163
+msgid "Streaming port"
+msgstr "Streaming Port"
+
+#: ../src/GBIpboxMenu.py:171
+msgid "Time of sync to start"
+msgstr "Startzeit Synchronisierung"
+
+#: ../src/GBIpboxMenu.py:168
+msgid "Use remote HDD"
+msgstr "Entfernte Festplatte benutzen"
+
+#: ../src/GBIpboxMenu.py:166
+msgid "Username"
+msgstr "Benutzername"
+
+#: ../src/plugin.py:41
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#: ../src/gbipboxwizard.xml
+msgid "Abort this Wizard"
+msgstr "Diesen Assistent abbrechen""
 
 #: ../src/gbipboxwizard.xml
 msgid "Cannot download data! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
-msgstr ""
+msgstr "Herunterladen fehlgeschlagen! Es tut uns leid, aber Wir können Ihre IPbox momentan nicht konfigurieren.\nBitte drücken Sie OK um diesen Assistent zu beenden."
 
 #: ../src/gbipboxwizard.xml
 msgid "No devices found! Sorry, we can't configure your ipbox right now.\nPlease press OK to close this Wizard."
-msgstr ""
+msgstr "Keine Geräte gefunden! Es tut uns leid, aber Wir können Ihre IPbox momentan nicht konfigurieren.\nBitte drücken Sie OK um diesen Assistent zu beenden."
 
 #: ../src/gbipboxwizard.xml
 msgid "Please wait while scan is in progress.\nThis operation may take a while."
-msgstr ""
+msgstr "Bitte warten Sie während der Suchlauf läuft.\Dieser Vorgang kann etwas dauern."
 
 #: ../src/gbipboxwizard.xml
 msgid "Scan for a server"
-msgstr ""
+msgstr "Suche einen Server"
 
 #: ../src/gbipboxwizard.xml
 msgid "Thank you for using the wizard. Your ipbox is now configured.\nPlease press OK to continue."
-msgstr ""
+msgstr "Danke das Sie den Assistent benutzt haben. Ihre IPbox ist nun konfiguriert.\nBitte drücken Sie OK um fortzufahren."
 
 #: ../src/gbipboxwizard.xml
 msgid "Try to download again"
-msgstr ""
+msgstr "Starte den Download erneut"
 
 #: ../src/gbipboxwizard.xml
 msgid "Try to scan again"
-msgstr ""
+msgstr "Starte den Suchlauf erneut"
 
 #: ../src/gbipboxwizard.xml
 msgid "Welcome.\n\nThis Wizard will help you to configure your ipbox."
-msgstr ""
+msgstr "Willkommen.\n\nDieser Assistent wird Sie bei der Konfiguration der IPbox unterstützen."
 
 #: ../src/gbipboxwizard.xml
 msgid "Your ipbox is not configured.\nPlease press OK to close this Wizard."
-msgstr ""
+msgstr "Ihre IPbox ist nicht konfiguriert.\nBitte drücken Sie OK um diesen Assistent zu beenden."
