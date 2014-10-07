@@ -101,6 +101,12 @@ class GBIpboxDownloader:
 			value = 'blacklist'
 		return value
 		
+	def getParentalControlPinState(self, baseurl):
+		return self.getSetting(baseurl, 'config.ParentalControl.servicepinactive') == 'true'
+		
+	def getParentalControlPin(self, baseurl):
+		return self.getSetting(baseurl, 'config.ParentalControl.servicepin.0')
+		
 	def downloadParentalControlBouquets(self, baseurl):
 		bouquets = []
 		httprequest = urllib2.urlopen(baseurl + '/web/parentcontrollist')
@@ -213,12 +219,19 @@ class GBIpboxDownloader:
 		
 	def downloadParentalControl(self, baseurl):
 		print "[GBIpboxClient] reading remote parental control status ..."
-		status = self.getEPGLocation(baseurl)
-		config.ParentalControl.configured.value = status
-		config.ParentalControl.configured.save()
 		
-		if status:
+		if self.getParentalControlEnabled(baseurl):
 			print "[GBIpboxClient] parental control enabled"
+			config.ParentalControl.configured.value = True
+			config.ParentalControl.configured.save()
+			print "[GBIpboxClient] reding pin status ..."
+			pinstatus = self.getParentalControlPinState(baseurl)
+			pin = self.getParentalControlPin(baseurl)
+			print "[GBIpboxClient] pin status is setted to " + str(pinstatus)
+			config.ParentalControl.servicepinactive.value = pinstatus
+			config.ParentalControl.servicepinactive.save()
+			config.ParentalControl.servicepin[0].value = pin
+			config.ParentalControl.servicepin[0].save()
 			print "[GBIpboxClient] reading remote parental control type ..."
 			stype = self.getParentalControlType(baseurl)
 			print "[GBIpboxClient] parental control type is " + stype
@@ -235,4 +248,4 @@ class GBIpboxDownloader:
 			from Components.ParentalControl import parentalControl
 			parentalControl.open()
 		else:
-			print "[GBIpboxClient] parental control disabled"
+			print "[GBIpboxClient] parental control disabled - do nothing"

@@ -24,7 +24,7 @@ self.scan()
 		</step>
 
 		<step id="download" nextstep="end">
-			<text value="Please wait while download is in progress." />
+			<text value="Please wait while download is in progress.\nNOTE: If you have parental control enabled on remote box, the local settings will be overwritten." />
 			<code>
 self.download()
 			</code>
