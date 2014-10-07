@@ -151,6 +151,9 @@ class GBIpboxWizard(Wizard):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 
+	def getTranslation(self, text):
+		return _(text)
+
 	def scan(self):
 		self.timer = eTimer()
 		self.timer.callback.append(self.doscan)
