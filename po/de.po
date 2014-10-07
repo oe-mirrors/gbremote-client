@@ -88,8 +88,8 @@ msgid "Password"
 msgstr "Passwort"
 
 #: ../src/GBIpboxMenu.py:196
-msgid "Please wait while download is in progress."
-msgstr "Es wird heruntergeladen. Bitte warten."
+msgid "Please wait while download is in progress.\\nNOTE: If you have parental control enabled on remote box, the local settings will be overwritten."
+msgstr "Es wird heruntergeladen. Bitte warten.\\nHinweis: Wenn auf der Serverbox der Jugendschutz aktiviert ist, werden Ihre getroffenen Jugendschutz Einstellungen überschrieben."
 
 #: ../src/GBIpboxMenu.py:210
 msgid "Please wait while scan is in progress.\\nThis operation may take a while"
