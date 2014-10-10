@@ -274,4 +274,3 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 	def downloadError(self):
 		self.timer.stop()
 		self.session.open(MessageBox, _("Cannot download data. Please check your configuration"), type = MessageBox.TYPE_ERROR)
-
