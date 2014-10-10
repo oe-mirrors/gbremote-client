@@ -20,7 +20,10 @@ S = "${WORKDIR}/git"
 inherit autotools-brokensep
 
 DEPENDS = "python"
+
 RDEPENDS_${PN} = "cifs"
+RCONFLICTS_${PN} = "enigma2-plugin-systemplugins-gbipboxclient"
+RREPLACES_${PN} = "enigma2-plugin-systemplugins-gbipboxclient"
 
 EXTRA_OECONF = "\
     --with-po \
