@@ -25,6 +25,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigClock, ConfigSelection
 
 from GBIpboxClient import GBIpboxClient, GBIpboxClientAutostart
+from GBIpboxRemoteTimer import GBIpboxRemoteTimer
 from GBIpboxWizard import GBIpboxWizard
 from GBIpboxLocale import _
 
@@ -40,6 +41,10 @@ config.ipboxclient.schedule = ConfigYesNo(default = True)
 config.ipboxclient.scheduletime = ConfigClock(default = 0) # 1:00
 config.ipboxclient.repeattype = ConfigSelection(default = "daily", choices = [("daily", _("Daily")), ("weekly", _("Weekly")), ("monthly", _("30 Days"))])
 config.ipboxclient.mounthdd = ConfigYesNo(default = True)
+config.ipboxclient.remotetimers = ConfigYesNo(default = True)
+
+def ipboxclientRecordTimer():
+	return GBIpboxRemoteTimer()
 
 def ipboxclientStart(menuid, **kwargs):
 	if menuid == "mainmenu":
@@ -62,8 +67,17 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name = "GBIpboxClient",
 			description = _("Gigablue IPBox network client"),
-			where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=ipboxclientStart)
+			where = PluginDescriptor.WHERE_MENU,
+			needsRestart = False,
+			fnc = ipboxclientStart
+		)
 	]
+	
+	if config.ipboxclient.remotetimers.value:
+		list.append(PluginDescriptor(
+			where = PluginDescriptor.WHERE_RECORDTIMER,
+			fnc = ipboxclientRecordTimer
+		))
 	
 	if not config.ipboxclient.firstconf.value:
 		list.append(PluginDescriptor(

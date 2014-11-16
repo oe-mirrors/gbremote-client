@@ -22,6 +22,7 @@
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.Standby import TryQuitMainloop
 
 from Components.ActionMap import ActionMap
 from Components.Button import Button
@@ -122,6 +123,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		self.session = session
 		self.list = []
 		self.timerinstance = timerinstance
+		self.remotetimer_old = config.ipboxclient.remotetimers.value
 		
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.list)
@@ -165,7 +167,8 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		if config.ipboxclient.auth.value:
 			self.list.append(getConfigListEntry(_("Username"), config.ipboxclient.username))
 			self.list.append(getConfigListEntry(_("Password"), config.ipboxclient.password))
-		self.list.append(getConfigListEntry(_("Use remote HDD"), config.ipboxclient.mounthdd))		
+		self.list.append(getConfigListEntry(_("Use remote HDD"), config.ipboxclient.mounthdd))
+		self.list.append(getConfigListEntry(_("Use remote timers"), config.ipboxclient.remotetimers))
 		self.list.append(getConfigListEntry(_("Schedule sync"), config.ipboxclient.schedule))
 		if config.ipboxclient.schedule.getValue():
 			self.list.append(getConfigListEntry(_("Time of sync to start"), config.ipboxclient.scheduletime))
@@ -267,9 +270,18 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			self.timer.callback.append(self.downloadError)
 			self.timer.start(100)
 
+	def restart(self, response):
+		if response:
+			self.session.open(TryQuitMainloop, 3)
+		else:
+			self.close()
+	
 	def downloadCompleted(self):
 		self.timer.stop()
-		self.session.openWithCallback(self.close, MessageBox, _("Download completed"), type = MessageBox.TYPE_INFO)
+		if self.remotetimer_old != config.ipboxclient.remotetimers.value:
+			self.session.openWithCallback(self.restart, MessageBox, _("To apply new settings, you need to reboot your STB. Do you want reboot it now?"), type = MessageBox.TYPE_YESNO)
+		else:
+			self.session.openWithCallback(self.close, MessageBox, _("Download completed"), type = MessageBox.TYPE_INFO)
 		
 	def downloadError(self):
 		self.timer.stop()
