@@ -108,7 +108,7 @@ class GBIpboxDownloader:
 		value = self.getSetting(baseurl, 'config.ParentalControl.servicepin.0')
 		if not value:
 			value = "0000"
-		return value
+		return int(value)
 		
 	def downloadParentalControlBouquets(self, baseurl):
 		bouquets = []
