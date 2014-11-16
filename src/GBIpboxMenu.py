@@ -28,6 +28,7 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
+from Components.Sources.Boolean import Boolean
 
 from GBIpboxDownloader import GBIpboxDownloader
 from GBIpboxScan import GBIpboxScan
@@ -130,6 +131,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		
 		self.setTitle(_('GBIpbox Client'))
 		
+		self["VKeyIcon"] = Boolean(False)
 		self["key_red"] = Button(_('Cancel'))
 		self["key_green"] = Button(_('Save'))
 		self["key_yellow"] = Button(_('Scan'))
