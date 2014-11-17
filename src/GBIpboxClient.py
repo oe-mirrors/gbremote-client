@@ -21,6 +21,7 @@
 #############################################################################
 
 from Screens.MessageBox import MessageBox
+from Screens.InfoBarGenerics import InfoBarTimeshift
 
 from GBIpboxMenu import GBIpboxMenu
 from GBIpboxTimer import GBIpboxTimer
@@ -38,6 +39,8 @@ def GBIpboxClient(session, **kwargs):
 def GBIpboxClientAutostart(reason, session=None, **kwargs):
 	global timerinstance
 	timerinstance = GBIpboxTimer(session)
+	
+	InfoBarTimeshift.ts_disabled = True
 	
 	mount = GBIpboxMount(session)
 	mount.automount()
