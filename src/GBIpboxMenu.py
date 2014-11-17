@@ -29,6 +29,7 @@ from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText
 from Components.Sources.Boolean import Boolean
+from Components.Sources.StaticText import StaticText
 
 from GBIpboxDownloader import GBIpboxDownloader
 from GBIpboxScan import GBIpboxScan
@@ -44,10 +45,17 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			<widget name="config"
 					position="10,10"
 					zPosition="3"
-					size="540,340"
+					size="540,270"
 					scrollbarMode="showOnDemand"
 					transparent="1">
 			</widget>
+
+			<widget source="text"
+					render="Label"
+					position="10,290"
+					size="540,60"
+					font="Regular;20" />
+
 			<widget name="key_red"
 					position="0,360"
 					size="140,40"
@@ -132,6 +140,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		self.setTitle(_('GBIpbox Client'))
 		
 		self["VKeyIcon"] = Boolean(False)
+		self["text"] = StaticText(_('NOTE: the remote HDD feature require samba installed on server box.'))
 		self["key_red"] = Button(_('Cancel'))
 		self["key_green"] = Button(_('Save'))
 		self["key_yellow"] = Button(_('Scan'))
