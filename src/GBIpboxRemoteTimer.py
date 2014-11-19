@@ -329,6 +329,13 @@ class GBIpboxRemoteTimer():
 
 		self.getTimers()
 
+	def isRecording(self):
+		isRunning = False
+		for timer in self.timer_list:
+			if timer.isRunning() and not timer.justplay:
+				isRunning = True
+		return isRunning
+
 	def saveTimer(self):
 		pass
 
