@@ -93,7 +93,7 @@ class GBIpboxDownloader:
 		return self.getSetting(baseurl, 'config.misc.epgcache_filename')
 		
 	def getParentalControlEnabled(self, baseurl):
-		return self.getSetting(baseurl, 'config.ParentalControl.configured') == 'true'
+		return self.getSetting(baseurl, 'config.ParentalControl.servicepinactive') == 'true'
 		
 	def getParentalControlType(self, baseurl):
 		value = self.getSetting(baseurl, 'config.ParentalControl.type')
@@ -225,8 +225,8 @@ class GBIpboxDownloader:
 		
 		if self.getParentalControlEnabled(baseurl):
 			print "[GBIpboxClient] parental control enabled"
-			config.ParentalControl.configured.value = True
-			config.ParentalControl.configured.save()
+			config.ParentalControl.servicepinactive.value = True
+			config.ParentalControl.servicepinactive.save()
 			print "[GBIpboxClient] reding pin status ..."
 			pinstatus = self.getParentalControlPinState(baseurl)
 			pin = self.getParentalControlPin(baseurl)
