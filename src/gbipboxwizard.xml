@@ -33,6 +33,8 @@ self.download()
 		<step id="abort">
 			<text value="Your ipbox is not configured.\nPlease press OK to close this Wizard." />
 			<code>
+config.ipboxclient.firstconf.value = True
+config.ipboxclient.firstconf.save()
 			</code>
 			<code pos="after">
 self.close()
