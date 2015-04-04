@@ -63,9 +63,9 @@ class GBIpboxDownloader:
 		print "[GBIpboxClient] streaming url: " + streamingurl
 		
 		for stype in [ "tv", "radio" ]:
-			print "[GBIpboxClient] download " + stype + " bouquets"
+			print "[GBIpboxClient] download " + stype + " bouquets from " + baseurl
 			bouquets = self.downloadBouquets(baseurl, stype)
-			print "[GBIpboxClient] save " + stype + " bouquets"
+			print "[GBIpboxClient] save " + stype + " bouquets from " + streamingurl
 			self.saveBouquets(bouquets, streamingurl, '/etc/enigma2/bouquets.' + stype)
 			
 		print "[GBIpboxClient] reload bouquets"
@@ -127,6 +127,7 @@ class GBIpboxDownloader:
 	def downloadBouquets(self, baseurl, stype):
 		bouquets = []
 		httprequest = urllib2.urlopen(baseurl + '/web/bouquets?stype=' + stype)
+		print "[GBIpboxClient] download bouquets from " + baseurl + '/web/bouquets?stype=' + stype
 		xmldoc = minidom.parseString(httprequest.read())
 		services = xmldoc.getElementsByTagName('e2service') 
 		for service in services:
@@ -172,7 +173,7 @@ class GBIpboxDownloader:
 						isStreaming = True
 					else:
 						isDVB = True
-						url = baseurl + ":8001/" + service['reference']
+						url = baseurl + service['reference']
 				
 				if isDVB:
 					outfile.write("#SERVICE " + service['reference'] + urllib.quote(url) + ":" + service['name'] + "\n")
