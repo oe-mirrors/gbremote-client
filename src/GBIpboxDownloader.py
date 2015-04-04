@@ -149,9 +149,10 @@ class GBIpboxDownloader:
 
 		return bouquets
 
-	def saveBouquets(self, bouquets, baseurl, destinationfile):
+	def saveBouquets(self, bouquets, streamingurl, destinationfile):
 		bouquetsfile = open(destinationfile, "w")
 		bouquetsfile.write("#NAME Bouquets (TV)" + "\n")
+		print "[GBIpboxClient] streamurl " + streamingurl
 		for bouquet in bouquets:
 			pattern = r'"([A-Za-z0-9_\./\\-]*)"'
 			m = re.search(pattern, bouquet['reference'])
@@ -173,7 +174,7 @@ class GBIpboxDownloader:
 						isStreaming = True
 					else:
 						isDVB = True
-						url = baseurl + service['reference']
+						url = streamingurl + "/" + service['reference']
 				
 				if isDVB:
 					outfile.write("#SERVICE " + service['reference'] + urllib.quote(url) + ":" + service['name'] + "\n")
