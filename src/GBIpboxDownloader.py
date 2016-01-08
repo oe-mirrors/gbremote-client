@@ -140,8 +140,18 @@ class GBIpboxDownloader:
 			xmldoc2 = minidom.parseString(httprequest.read())
 			services2 = xmldoc2.getElementsByTagName('e2service') 
 			for service2 in services2:
+				ref = ""
+				tmp = getValueFromNode(service2, 'e2servicereference')
+				cnt = 0
+				for x in tmp:
+					ref += x
+					if x == ':':
+						cnt += 1
+					if cnt == 10:
+						break
+
 				bouquet['services'].append({
-					'reference': getValueFromNode(service2, 'e2servicereference'),
+					'reference': ref,
 					'name': getValueFromNode(service2, 'e2servicename')
 				})
 
