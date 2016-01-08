@@ -36,13 +36,13 @@ def getValueFromNode(event, key):
 	tmp = event.getElementsByTagName(key)[0].firstChild
 	if (tmp):
 		return str(tmp.nodeValue)
-	
+
 	return ""
 
 class GBIpboxDownloader:
 	def __init__(self, session):
 		self.session = session
-		
+
 	def download(self):
 		baseurl = "http://"
 		if config.ipboxclient.auth.value:
@@ -50,71 +50,71 @@ class GBIpboxDownloader:
 			baseurl += ":"
 			baseurl += config.ipboxclient.password.value
 			baseurl += "@"
-			
+
 		baseurl += config.ipboxclient.host.value
 		baseurl += ":"
-		
+
 		streamingurl = baseurl
 
 		baseurl += str(config.ipboxclient.port.value)
 		streamingurl += str(config.ipboxclient.streamport.value)
-		
+
 		print "[GBIpboxClient] web interface url: " + baseurl
 		print "[GBIpboxClient] streaming url: " + streamingurl
-		
+
 		for stype in [ "tv", "radio" ]:
 			print "[GBIpboxClient] download " + stype + " bouquets from " + baseurl
 			bouquets = self.downloadBouquets(baseurl, stype)
 			print "[GBIpboxClient] save " + stype + " bouquets from " + streamingurl
 			self.saveBouquets(bouquets, streamingurl, '/etc/enigma2/bouquets.' + stype)
-			
+
 		print "[GBIpboxClient] reload bouquets"
 		self.reloadBouquets()
-		
+
 		print "[GBIpboxClient] sync EPG"
 		self.downloadEPG(baseurl)
-		
+
 		print "[GBIpboxClient] sync parental control"
 		self.downloadParentalControl(baseurl)
-		
+
 		print "[GBIpboxClient] sync is done!"
-		
+
 	def getSetting(self, baseurl, key):
 		httprequest = urllib2.urlopen(baseurl + '/web/settings')
 		xmldoc = minidom.parseString(httprequest.read())
-		settings = xmldoc.getElementsByTagName('e2setting') 
+		settings = xmldoc.getElementsByTagName('e2setting')
 		for setting in settings:
 			if getValueFromNode(setting, 'e2settingname') == key:
 				return getValueFromNode(setting, 'e2settingvalue')
-			
+
 		return None
-		
+
 	def getEPGLocation(self, baseurl):
 		return self.getSetting(baseurl, 'config.misc.epgcache_filename')
-		
+
 	def getParentalControlEnabled(self, baseurl):
 		return self.getSetting(baseurl, 'config.ParentalControl.servicepinactive') == 'true'
-		
+
 	def getParentalControlType(self, baseurl):
 		value = self.getSetting(baseurl, 'config.ParentalControl.type')
 		if not value:
 			value = 'blacklist'
 		return value
-		
+
 	def getParentalControlPinState(self, baseurl):
 		return self.getSetting(baseurl, 'config.ParentalControl.servicepinactive') == 'true'
-		
+
 	def getParentalControlPin(self, baseurl):
 		value = self.getSetting(baseurl, 'config.ParentalControl.servicepin.0')
 		if not value:
 			value = "0000"
 		return int(value)
-		
+
 	def downloadParentalControlBouquets(self, baseurl):
 		bouquets = []
 		httprequest = urllib2.urlopen(baseurl + '/web/parentcontrollist')
 		xmldoc = minidom.parseString(httprequest.read())
-		services = xmldoc.getElementsByTagName('e2service') 
+		services = xmldoc.getElementsByTagName('e2service')
 		for service in services:
 			bouquet = {}
 			bouquet['reference'] = getValueFromNode(service, 'e2servicereference')
@@ -129,7 +129,7 @@ class GBIpboxDownloader:
 		httprequest = urllib2.urlopen(baseurl + '/web/bouquets?stype=' + stype)
 		print "[GBIpboxClient] download bouquets from " + baseurl + '/web/bouquets?stype=' + stype
 		xmldoc = minidom.parseString(httprequest.read())
-		services = xmldoc.getElementsByTagName('e2service') 
+		services = xmldoc.getElementsByTagName('e2service')
 		for service in services:
 			bouquet = {}
 			bouquet['reference'] = getValueFromNode(service, 'e2servicereference')
@@ -138,7 +138,7 @@ class GBIpboxDownloader:
 
 			httprequest = urllib2.urlopen(baseurl + '/web/getservices?' + urllib.urlencode({'sRef': bouquet['reference']}) + '&hidden=1')
 			xmldoc2 = minidom.parseString(httprequest.read())
-			services2 = xmldoc2.getElementsByTagName('e2service') 
+			services2 = xmldoc2.getElementsByTagName('e2service')
 			for service2 in services2:
 				ref = ""
 				tmp = getValueFromNode(service2, 'e2servicereference')
@@ -168,7 +168,7 @@ class GBIpboxDownloader:
 			m = re.search(pattern, bouquet['reference'])
 			if not m:
 				continue
-			
+
 			filename = m.group().strip("\"")
 			bouquetsfile.write("#SERVICE " + bouquet['reference'] + "\n")
 			outfile = open("/etc/enigma2/" + filename, "w")
@@ -178,14 +178,14 @@ class GBIpboxDownloader:
 				isDVB = False
 				isStreaming = False
 				url = ""
-			
+
 				if len(tmp) > 1 and tmp[0] == '1' and tmp[1] == '0':
 					if len(tmp) > 10 and tmp[10].startswith('http%3a//'):
 						isStreaming = True
 					else:
 						isDVB = True
 						url = streamingurl + "/" + service['reference']
-				
+
 				if isDVB:
 					outfile.write("#SERVICE " + service['reference'] + urllib.quote(url) + ":" + service['name'] + "\n")
 				elif isStreaming:
@@ -195,7 +195,7 @@ class GBIpboxDownloader:
 					outfile.write("#DESCRIPTION " + service['name'] + "\n")
 			outfile.close()
 		bouquetsfile.close()
-		
+
 	def reloadBouquets(self):
 		db = eDVBDB.getInstance()
 		db.reloadServicelist()
@@ -207,12 +207,12 @@ class GBIpboxDownloader:
 		if not filename:
 			print "[GBIpboxClient] error downloading remote EPG location. Skip EPG sync."
 			return
-			
+
 		print "[GBIpboxClient] remote EPG found at " + filename
-		
+
 		print "[GBIpboxClient] dump remote EPG to epg.dat"
 		httprequest = urllib2.urlopen(baseurl + '/web/saveepg')
-		
+
 		httprequest = urllib2.urlopen(baseurl + '/file?action=download&file=' + urllib.quote(filename))
 		data = httprequest.read()
 		if not data:
@@ -224,17 +224,17 @@ class GBIpboxDownloader:
 		except Exception:
 			print "[GBIpboxClient] cannot save EPG. Skip EPG sync."
 			return
-			
+
 		epgfile.write(data)
 		epgfile.close()
-		
+
 		print "[GBIpboxClient] reload EPG"
 		epgcache = eEPGCache.getInstance()
 		epgcache.load()
-		
+
 	def downloadParentalControl(self, baseurl):
 		print "[GBIpboxClient] reading remote parental control status ..."
-		
+
 		if self.getParentalControlEnabled(baseurl):
 			print "[GBIpboxClient] parental control enabled"
 			config.ParentalControl.servicepinactive.value = True
