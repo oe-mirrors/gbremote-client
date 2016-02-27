@@ -170,3 +170,6 @@ msgstr "Willkommen.\n\nDieser Assistent wird Sie bei der Konfiguration der IPbox
 #: ../src/gbipboxwizard.xml
 msgid "Your ipbox is not configured.\nPlease press OK to close this Wizard."
 msgstr "Ihre IPbox ist nicht konfiguriert.\nBitte drücken Sie OK um diesen Assistent zu beenden."
+
+msgid "Use remote timers"
+msgstr "Verwende Serverbox Timer"
