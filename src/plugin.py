@@ -28,6 +28,7 @@ from GBIpboxClient import GBIpboxClient, GBIpboxClientAutostart
 from GBIpboxRemoteTimer import GBIpboxRemoteTimer
 from GBIpboxWizard import GBIpboxWizard
 from GBIpboxLocale import _
+from boxbranding import getImageDistro
 
 config.ipboxclient = ConfigSubsection()
 config.ipboxclient.host = ConfigText(default = "", fixed_size = False)
@@ -47,39 +48,59 @@ def ipboxclientRecordTimer():
 	return GBIpboxRemoteTimer()
 
 def ipboxclientStart(menuid, **kwargs):
-	if menuid == "mainmenu":
+	if getImageDistro() in ("openatv"):
+		if menuid == "scan":
+			return [(_("IPBOX Client"), GBIpboxClient, "ipbox_client_Start", 13)]
+		else:
+			return []
+	elif menuid == "mainmenu":
 		return [(_("GBIpboxClient"), GBIpboxClient, "ipbox_client_Start", 13)]
 	else:
 		return []
 
 def Plugins(**kwargs):
-	list = [
-		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			fnc = GBIpboxClientAutostart
-		),
-		PluginDescriptor(
-			name = "GBIpboxClient",
-			description = _("Gigablue IPBox network client"),
-			where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
-			fnc = GBIpboxClient
-		),
-		PluginDescriptor(
-			name = "GBIpboxClient",
-			description = _("Gigablue IPBox network client"),
-			where = PluginDescriptor.WHERE_MENU,
-			needsRestart = False,
-			fnc = ipboxclientStart
-		)
-	]
-	
+	if getImageDistro() in ("openatv"):
+		list = [
+			PluginDescriptor(
+				where = PluginDescriptor.WHERE_SESSIONSTART,
+				fnc = GBIpboxClientAutostart
+			),
+			PluginDescriptor(
+				name = "IPBOX Client",
+				description = _("IPBox network client"),
+				where = PluginDescriptor.WHERE_MENU,
+				needsRestart = False,
+				fnc = ipboxclientStart
+			)
+		]
+	else:
+		list = [
+			PluginDescriptor(
+				where = PluginDescriptor.WHERE_SESSIONSTART,
+				fnc = GBIpboxClientAutostart
+			),
+			PluginDescriptor(
+				name = "GBIpboxClient",
+				description = _("Gigablue IPBox network client"),
+				where = [PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
+				fnc = GBIpboxClient
+			),
+			PluginDescriptor(
+				name = "GBIpboxClient",
+				description = _("Gigablue IPBox network client"),
+				where = PluginDescriptor.WHERE_MENU,
+				needsRestart = False,
+				fnc = ipboxclientStart
+			)
+		]
+
 	if config.ipboxclient.remotetimers.value:
 		list.append(PluginDescriptor(
 			where = PluginDescriptor.WHERE_RECORDTIMER,
 			fnc = ipboxclientRecordTimer
 		))
 	
-	if not config.ipboxclient.firstconf.value:
+	if not config.ipboxclient.firstconf.value and not getImageDistro() in ("openatv"):
 		list.append(PluginDescriptor(
 			name = _("IPBox wizard"),
 			where = PluginDescriptor.WHERE_WIZARD,
