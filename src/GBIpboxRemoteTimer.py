@@ -271,25 +271,25 @@ class GBIpboxRemoteTimer():
 		print "[GBIpboxRemoteTimer] timer changed ", str(entry)
 
 		entry.service_ref = ServiceReference(":".join(str(entry.service_ref).split(":")[:10]))
-		try:
-			args = urllib.urlencode({
-					'sRef': str(entry.service_ref),
-					'begin': str(entry.begin),
-					'end': str(entry.end),
-					'channelOld': str(entry.orig.service_ref),
-					'beginOld': str(entry.orig.begin),
-					'endOld': str(entry.orig.end),
-					'name': entry.name,
-					'disabled': str(1 if entry.disabled else 0),
-					'justplay': str(1 if entry.justplay else 0),
-					'afterevent': str(entry.afterEvent),
-					'dirname': str(entry.dirname),
-					'tags': " ".join(entry.tags),
-					'repeated': str(entry.repeated),
-					'description': entry.description
-				})
+		args = urllib.urlencode({
+				'sRef': str(entry.service_ref),
+				'begin': str(entry.begin),
+				'end': str(entry.end),
+				'channelOld': str(entry.orig.service_ref),
+				'beginOld': str(entry.orig.begin),
+				'endOld': str(entry.orig.end),
+				'name': entry.name,
+				'disabled': str(1 if entry.disabled else 0),
+				'justplay': str(1 if entry.justplay else 0),
+				'afterevent': str(entry.afterEvent),
+				'dirname': str(entry.dirname),
+				'tags': " ".join(entry.tags),
+				'repeated': str(entry.repeated),
+				'description': entry.description
+			})
 
-			baseurl = self.getBaseUrl()
+		baseurl = self.getBaseUrl()
+		try:
 			httprequest = urllib2.urlopen(baseurl + '/web/timerchange?' + args)
 			xmldoc = minidom.parseString(httprequest.read())
 			status = xmldoc.getElementsByTagName('e2simplexmlresult')[0]
