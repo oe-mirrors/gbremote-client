@@ -32,9 +32,12 @@ class GBIpboxMount:
 	def __init__(self, session):
 		self.session = session
 		self.console = Console()
-		self.mountpoint = '/media/hdd'
+		if os.path.exists('/media/hdd') or os.system('mount |grep -i /media/hdd') == 0:
+			self.mountpoint = '/media/net/IpBox'
+		else:
+			self.mountpoint = '/media/hdd'
 		self.share = 'Harddisk'
-		
+
 	def automount(self):
 		global mountstate
 		global mounthost
@@ -45,7 +48,7 @@ class GBIpboxMount:
 				if not self.umount(self.mountpoint):
 					print 'Cannot umount ' + self.mounpoint
 					return
-					
+
 			if not self.mount(config.ipboxclient.host.value, self.share, self.mountpoint):
 				print 'Cannot mount ' + config.ipboxclient.host.value + '/' + self.share + ' to ' + self.mountpoint
 			else:
@@ -75,4 +78,3 @@ class GBIpboxMount:
 		except Exception:
 			pass
 		return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,username=guest,password= //' + ip + '/' + share + ' ' + path) == 0
-
