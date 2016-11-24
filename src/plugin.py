@@ -23,7 +23,7 @@
 from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigClock, ConfigSelection
-
+from Tools.Directories import fileExists
 from GBIpboxClient import GBIpboxClient, GBIpboxClientAutostart
 from GBIpboxRemoteTimer import GBIpboxRemoteTimer
 from GBIpboxWizard import GBIpboxWizard
@@ -57,6 +57,14 @@ def ipboxclientStart(menuid, **kwargs):
 		return [(_("GBIpboxClient"), GBIpboxClient, "ipbox_client_Start", 13)]
 	else:
 		return []
+
+def getHasTuners():
+	if fileExists("/proc/bus/nim_sockets"):
+		nimfile = open("/proc/bus/nim_sockets")
+		data = nimfile.read().strip()
+		nimfile.close()
+		return len(data) > 0
+	return False
 
 def Plugins(**kwargs):
 	if getImageDistro() in ("openatv"):
@@ -99,8 +107,8 @@ def Plugins(**kwargs):
 			where = PluginDescriptor.WHERE_RECORDTIMER,
 			fnc = ipboxclientRecordTimer
 		))
-	
-	if not config.ipboxclient.firstconf.value and not getImageDistro() in ("openatv"):
+
+	if not config.ipboxclient.firstconf.value and getHasTuners() == False and not getImageDistro() in ("openatv"):
 		list.append(PluginDescriptor(
 			name = _("IPBox wizard"),
 			where = PluginDescriptor.WHERE_WIZARD,
