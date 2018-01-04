@@ -77,4 +77,4 @@ class GBIpboxMount:
 			os.makedirs(path)
 		except Exception:
 			pass
-		return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,username=guest,password= //' + ip + '/' + share + ' ' + path) == 0
+		return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,vers=2.0,username=guest,password= //' + ip + '/' + share + ' ' + path) == 0
