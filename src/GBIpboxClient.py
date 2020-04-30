@@ -40,7 +40,7 @@ def GBIpboxClientAutostart(reason, session=None, **kwargs):
 	global timerinstance
 	timerinstance = GBIpboxTimer(session)
 	
-	InfoBarTimeshift.ts_disabled = True
+	#InfoBarTimeshift.ts_disabled = True
 	
 	mount = GBIpboxMount(session)
 	mount.automount()
