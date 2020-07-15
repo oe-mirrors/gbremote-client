@@ -77,4 +77,9 @@ class GBIpboxMount:
 			os.makedirs(path)
 		except Exception:
 			pass
-		return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,vers=2.0,username=guest,password= //' + ip + '/' + share + ' ' + path) == 0
+		if config.ipboxclient.auth.value:
+			mountusername = config.ipboxclient.username.value
+			mountpassword = config.ipboxclient.password.value
+			return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,vers=2.0,username=' + mountusername + ',password=' + mountpassword + ' //' + ip + '/' + share + ' ' + path) == 0
+		else:
+			return os.system('mount -t cifs -o rw,nolock,noatime,noserverino,iocharset=utf8,vers=2.0,username=guest,password= //' + ip + '/' + share + ' ' + path) == 0
