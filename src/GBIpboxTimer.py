@@ -29,13 +29,14 @@ from enigma import eTimer
 
 from time import localtime, time, strftime, mktime
 
+
 class GBIpboxTimer:
 	def __init__(self, session):
 		self.session = session
-		
+
 		self.ipboxdownloadtimer = eTimer()
 		self.ipboxdownloadtimer.callback.append(self.onIpboxDownloadTimer)
-		
+
 		self.ipboxpolltimer = eTimer()
 		self.ipboxpolltimer.timeout.get().append(self.onIpboxPollTimer)
 
@@ -57,17 +58,17 @@ class GBIpboxTimer:
 		if scheduled_time > 0:
 			if scheduled_time < now:
 				if config.ipboxclient.repeattype.value == "daily":
-					scheduled_time += 24*3600
-					while (int(scheduled_time)-30) < now:
-						scheduled_time += 24*3600
+					scheduled_time += 24 * 3600
+					while (int(scheduled_time) - 30) < now:
+						scheduled_time += 24 * 3600
 				elif config.ipboxclient.repeattype.value == "weekly":
-					scheduled_time += 7*24*3600
-					while (int(scheduled_time)-30) < now:
-						scheduled_time += 7*24*3600
+					scheduled_time += 7 * 24 * 3600
+					while (int(scheduled_time) - 30) < now:
+						scheduled_time += 7 * 24 * 3600
 				elif config.ipboxclient.repeattype.value == "monthly":
-					scheduled_time += 30*24*3600
-					while (int(scheduled_time)-30) < now:
-						scheduled_time += 30*24*3600
+					scheduled_time += 30 * 24 * 3600
+					while (int(scheduled_time) - 30) < now:
+						scheduled_time += 30 * 24 * 3600
 			next = scheduled_time - now
 			self.ipboxdownloadtimer.startLongTimer(next)
 		else:
@@ -97,4 +98,3 @@ class GBIpboxTimer:
 		else:
 			self.scheduledtime = 0
 			self.ipboxpolltimer.stop()
-

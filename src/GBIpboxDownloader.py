@@ -32,12 +32,14 @@ import urllib2
 import re
 import os
 
+
 def getValueFromNode(event, key):
 	tmp = event.getElementsByTagName(key)[0].firstChild
 	if (tmp):
 		return str(tmp.nodeValue)
 
 	return ""
+
 
 class GBIpboxDownloader:
 	def __init__(self, session):
@@ -62,7 +64,7 @@ class GBIpboxDownloader:
 		print "[GBIpboxClient] web interface url: " + baseurl
 		print "[GBIpboxClient] streaming url: " + streamingurl
 
-		for stype in [ "tv", "radio" ]:
+		for stype in ["tv", "radio"]:
 			print "[GBIpboxClient] download " + stype + " bouquets from " + baseurl
 			bouquets = self.downloadBouquets(baseurl, stype)
 			print "[GBIpboxClient] save " + stype + " bouquets from " + streamingurl
@@ -134,7 +136,7 @@ class GBIpboxDownloader:
 			bouquet = {}
 			bouquet['reference'] = getValueFromNode(service, 'e2servicereference')
 			bouquet['name'] = getValueFromNode(service, 'e2servicename')
-			bouquet['services'] = [];
+			bouquet['services'] = []
 
 			httprequest = urllib2.urlopen(baseurl + '/web/getservices?' + urllib.urlencode({'sRef': bouquet['reference']}) + '&hidden=1')
 			xmldoc2 = minidom.parseString(httprequest.read())

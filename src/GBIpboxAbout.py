@@ -29,6 +29,7 @@ from Components.Label import Label
 from GBIpboxLocale import _
 from boxbranding import getImageDistro
 
+
 class GBIpboxAbout(Screen):
 	skin = """
 			<screen position="360,150" size="560,400">
@@ -38,7 +39,7 @@ class GBIpboxAbout(Screen):
 						font="Regular;22"
 						zPosition="1" />
 			</screen>"""
-			
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -51,12 +52,12 @@ class GBIpboxAbout(Screen):
 
 		about += "(c) 2014 Impex-Sat Gmbh & Co.KG\n\n"
 		about += "Written by Sandro Cavazzoni <sandro@skanetwork.com>"
-		
+
 		self['about'] = Label(about)
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel
 		})
-		
+
 	def keyCancel(self):
 		self.close()

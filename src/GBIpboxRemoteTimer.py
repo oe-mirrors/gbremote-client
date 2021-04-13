@@ -37,21 +37,23 @@ import urllib2
 import re
 import os
 
+
 def getValueFromNode(event, key):
 	tmp = event.getElementsByTagName(key)[0].firstChild
 	if (tmp):
 		return str(tmp.nodeValue)
-	
+
 	return ""
+
 
 class GBIpboxRemoteTimer():
 	_timer_list = []
 	_processed_timers = []
-	
+
 	on_state_change = []
 
 	last_update_ts = 0
-	
+
 	def __init__(self):
 		pass
 
@@ -94,7 +96,7 @@ class GBIpboxRemoteTimer():
 		try:
 			httprequest = urllib2.urlopen(baseurl + '/web/timerlist')
 			xmldoc = minidom.parseString(httprequest.read())
-			timers = xmldoc.getElementsByTagName('e2timer') 
+			timers = xmldoc.getElementsByTagName('e2timer')
 			for timer in timers:
 				serviceref = ServiceReference(getValueFromNode(timer, 'e2servicereference'))
 				begin = int(getValueFromNode(timer, 'e2timebegin'))
@@ -109,10 +111,10 @@ class GBIpboxRemoteTimer():
 				location = getValueFromNode(timer, 'e2location')
 				tags = getValueFromNode(timer, 'e2tags').split(" ")
 
-				entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = 1, record_ecm = 0, isAutoTimer = 0, always_zap = 0)
+				entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=location, tags=tags, descramble=1, record_ecm=0, isAutoTimer=0, always_zap=0)
 				entry.repeated = repeated
 
-				entry.orig = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = 1, record_ecm = 0, isAutoTimer = 0, always_zap = 0)
+				entry.orig = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=location, tags=tags, descramble=1, record_ecm=0, isAutoTimer=0, always_zap=0)
 				entry.orig.repeated = repeated
 
 				if entry.shouldSkip() or entry.state == TimerEntry.StateEnded or (entry.state == TimerEntry.StateWaiting and entry.disabled):
@@ -121,9 +123,9 @@ class GBIpboxRemoteTimer():
 					insort(self._timer_list, entry)
 		except Exception, e:
 			print "[GBIpboxRemoteTimer]", e
-		
+
 		self.last_update_ts = time()
-		
+
 	def getBaseUrl(self):
 		baseurl = "http://"
 		if config.ipboxclient.auth.value:
@@ -131,18 +133,18 @@ class GBIpboxRemoteTimer():
 			baseurl += ":"
 			baseurl += config.ipboxclient.password.value
 			baseurl += "@"
-			
+
 		baseurl += config.ipboxclient.host.value
 		baseurl += ":"
 		baseurl += str(config.ipboxclient.port.value)
 		return baseurl
-	
+
 	def getNextRecordingTime(self):
 		return -1
-	
+
 	def getNextZapTime(self):
 		return -1
-	
+
 	def isNextRecordAfterEventActionAuto(self):
 		return False
 
@@ -174,14 +176,14 @@ class GBIpboxRemoteTimer():
 					if bt is None:
 						bt = localtime(begin)
 						et = localtime(end)
-						bday = bt.tm_wday;
+						bday = bt.tm_wday
 						begin2 = bday * 1440 + bt.tm_hour * 60 + bt.tm_min
-						end2   = et.tm_wday * 1440 + et.tm_hour * 60 + et.tm_min
+						end2 = et.tm_wday * 1440 + et.tm_hour * 60 + et.tm_min
 					if x.repeated & (1 << bday):
 						xbt = localtime(x.begin)
 						xet = localtime(timer_end)
 						xbegin = bday * 1440 + xbt.tm_hour * 60 + xbt.tm_min
-						xend   = bday * 1440 + xet.tm_hour * 60 + xet.tm_min
+						xend = bday * 1440 + xet.tm_hour * 60 + xet.tm_min
 						if xend < xbegin:
 							xend += 1440
 						if begin2 < xbegin <= end2:
@@ -214,7 +216,7 @@ class GBIpboxRemoteTimer():
 							time_match = end - begin
 							type = type_offset + 2
 				if time_match:
-					if type in (2,7,12): # When full recording do not look further
+					if type in (2, 7, 12): # When full recording do not look further
 						returnValue = (time_match, [type], isAutoTimer)
 						break
 					elif returnValue:
@@ -259,7 +261,7 @@ class GBIpboxRemoteTimer():
 		self.getTimers()
 
 		if not success:
-			timersanitycheck = TimerSanityCheck(self._timer_list,entry)
+			timersanitycheck = TimerSanityCheck(self._timer_list, entry)
 			if not timersanitycheck.check():
 				print "timer conflict detected!"
 				print timersanitycheck.getSimulTimerList()
@@ -301,7 +303,7 @@ class GBIpboxRemoteTimer():
 		self.getTimers()
 
 		if not success:
-			timersanitycheck = TimerSanityCheck(self._timer_list,entry)
+			timersanitycheck = TimerSanityCheck(self._timer_list, entry)
 			if not timersanitycheck.check():
 				print "timer conflict detected!"
 				print timersanitycheck.getSimulTimerList()
