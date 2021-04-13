@@ -134,7 +134,7 @@ class GBIpboxDownloader:
 			bouquet = {}
 			bouquet['reference'] = getValueFromNode(service, 'e2servicereference')
 			bouquet['name'] = getValueFromNode(service, 'e2servicename')
-			bouquet['services'] = [];
+			bouquet['services'] = []
 
 			httprequest = urllib2.urlopen(baseurl + '/web/getservices?' + urllib.urlencode({'sRef': bouquet['reference']}) + '&hidden=1')
 			xmldoc2 = minidom.parseString(httprequest.read())

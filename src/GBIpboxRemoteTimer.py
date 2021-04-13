@@ -174,7 +174,7 @@ class GBIpboxRemoteTimer():
 					if bt is None:
 						bt = localtime(begin)
 						et = localtime(end)
-						bday = bt.tm_wday;
+						bday = bt.tm_wday
 						begin2 = bday * 1440 + bt.tm_hour * 60 + bt.tm_min
 						end2   = et.tm_wday * 1440 + et.tm_hour * 60 + et.tm_min
 					if x.repeated & (1 << bday):
