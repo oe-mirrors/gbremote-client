@@ -109,10 +109,10 @@ class GBIpboxRemoteTimer():
 				location = getValueFromNode(timer, 'e2location')
 				tags = getValueFromNode(timer, 'e2tags').split(" ")
 
-				entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = 1, record_ecm = 0, isAutoTimer = 0, always_zap = 0)
+				entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=location, tags=tags, descramble=1, record_ecm=0, isAutoTimer=0, always_zap=0)
 				entry.repeated = repeated
 
-				entry.orig = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = 1, record_ecm = 0, isAutoTimer = 0, always_zap = 0)
+				entry.orig = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=location, tags=tags, descramble=1, record_ecm=0, isAutoTimer=0, always_zap=0)
 				entry.orig.repeated = repeated
 
 				if entry.shouldSkip() or entry.state == TimerEntry.StateEnded or (entry.state == TimerEntry.StateWaiting and entry.disabled):

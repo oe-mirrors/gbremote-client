@@ -211,7 +211,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		mount = GBIpboxMount(self.session)
 		mount.remount()
 			
-		self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.\nNOTE: If you have parental control enabled on remote box, the local settings will be overwritten.'), MessageBox.TYPE_INFO, enable_input = False)
+		self.messagebox = self.session.open(MessageBox, _('Please wait while download is in progress.\nNOTE: If you have parental control enabled on remote box, the local settings will be overwritten.'), MessageBox.TYPE_INFO, enable_input=False)
 		self.timer = eTimer()
 		self.timer.callback.append(self.download)
 		self.timer.start(100)
@@ -225,7 +225,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 		self.session.open(GBIpboxAbout)
 		
 	def keyScan(self):
-		self.messagebox = self.session.open(MessageBox, _('Please wait while scan is in progress.\nThis operation may take a while'), MessageBox.TYPE_INFO, enable_input = False)
+		self.messagebox = self.session.open(MessageBox, _('Please wait while scan is in progress.\nThis operation may take a while'), MessageBox.TYPE_INFO, enable_input=False)
 		self.timer = eTimer()
 		self.timer.callback.append(self.scan)
 		self.timer.start(100)
@@ -249,7 +249,7 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 			message = _("Choose your main device")
 			self.session.openWithCallback(self.scanCallback, MessageBox, message, list=menulist)
 		else:
-			self.session.open(MessageBox, _("No devices found"), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("No devices found"), type=MessageBox.TYPE_ERROR)
 		
 	def scanCallback(self, result):
 		if (result):
@@ -294,10 +294,10 @@ class GBIpboxMenu(Screen, ConfigListScreen):
 	def downloadCompleted(self):
 		self.timer.stop()
 		if self.remotetimer_old != config.ipboxclient.remotetimers.value:
-			self.session.openWithCallback(self.restart, MessageBox, _("To apply new settings, you need to reboot your STB. Do you want reboot it now?"), type = MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.restart, MessageBox, _("To apply new settings, you need to reboot your STB. Do you want reboot it now?"), type=MessageBox.TYPE_YESNO)
 		else:
-			self.session.openWithCallback(self.close, MessageBox, _("Download completed"), type = MessageBox.TYPE_INFO)
+			self.session.openWithCallback(self.close, MessageBox, _("Download completed"), type=MessageBox.TYPE_INFO)
 		
 	def downloadError(self):
 		self.timer.stop()
-		self.session.open(MessageBox, _("Cannot download data. Please check your configuration"), type = MessageBox.TYPE_ERROR)
+		self.session.open(MessageBox, _("Cannot download data. Please check your configuration"), type=MessageBox.TYPE_ERROR)
