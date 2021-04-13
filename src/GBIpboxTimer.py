@@ -33,10 +33,10 @@ from time import localtime, time, strftime, mktime
 class GBIpboxTimer:
 	def __init__(self, session):
 		self.session = session
-		
+
 		self.ipboxdownloadtimer = eTimer()
 		self.ipboxdownloadtimer.callback.append(self.onIpboxDownloadTimer)
-		
+
 		self.ipboxpolltimer = eTimer()
 		self.ipboxpolltimer.timeout.get().append(self.onIpboxPollTimer)
 
@@ -98,4 +98,3 @@ class GBIpboxTimer:
 		else:
 			self.scheduledtime = 0
 			self.ipboxpolltimer.stop()
-

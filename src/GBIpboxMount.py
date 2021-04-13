@@ -66,13 +66,13 @@ class GBIpboxMount:
 			self.automount()
 		elif mountstate and config.ipboxclient.mounthdd.value != mounthost:
 			self.automount()
-	
+
 	def isMountPoint(self, path):
 		return os.system('mountpoint ' + path) == 0
-		
+
 	def umount(self, path=None):
 		return os.system('umount ' + path) == 0
-		
+
 	def mount(self, ip, share, path):
 		try:
 			os.makedirs(path)

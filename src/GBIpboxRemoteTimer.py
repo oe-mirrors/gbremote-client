@@ -42,18 +42,18 @@ def getValueFromNode(event, key):
 	tmp = event.getElementsByTagName(key)[0].firstChild
 	if (tmp):
 		return str(tmp.nodeValue)
-	
+
 	return ""
 
 
 class GBIpboxRemoteTimer():
 	_timer_list = []
 	_processed_timers = []
-	
+
 	on_state_change = []
 
 	last_update_ts = 0
-	
+
 	def __init__(self):
 		pass
 
@@ -96,7 +96,7 @@ class GBIpboxRemoteTimer():
 		try:
 			httprequest = urllib2.urlopen(baseurl + '/web/timerlist')
 			xmldoc = minidom.parseString(httprequest.read())
-			timers = xmldoc.getElementsByTagName('e2timer') 
+			timers = xmldoc.getElementsByTagName('e2timer')
 			for timer in timers:
 				serviceref = ServiceReference(getValueFromNode(timer, 'e2servicereference'))
 				begin = int(getValueFromNode(timer, 'e2timebegin'))
@@ -123,9 +123,9 @@ class GBIpboxRemoteTimer():
 					insort(self._timer_list, entry)
 		except Exception, e:
 			print "[GBIpboxRemoteTimer]", e
-		
+
 		self.last_update_ts = time()
-		
+
 	def getBaseUrl(self):
 		baseurl = "http://"
 		if config.ipboxclient.auth.value:
@@ -133,18 +133,18 @@ class GBIpboxRemoteTimer():
 			baseurl += ":"
 			baseurl += config.ipboxclient.password.value
 			baseurl += "@"
-			
+
 		baseurl += config.ipboxclient.host.value
 		baseurl += ":"
 		baseurl += str(config.ipboxclient.port.value)
 		return baseurl
-	
+
 	def getNextRecordingTime(self):
 		return -1
-	
+
 	def getNextZapTime(self):
 		return -1
-	
+
 	def isNextRecordAfterEventActionAuto(self):
 		return False
 

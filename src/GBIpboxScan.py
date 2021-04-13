@@ -52,7 +52,7 @@ class ScanHost(threading.Thread):
 
 		except socket.gaierror:
 			self.isopen = False
-			
+
 		except socket.error:
 			self.isopen = False
 
@@ -60,17 +60,17 @@ class ScanHost(threading.Thread):
 class GBIpboxScan:
 	def __init__(self, session):
 		self.session = session
-		
+
 	def scan(self):
 		print "[GBIpboxClient] network scan started"
 		devices = []
 		for key in iNetwork.ifaces:
 			if iNetwork.ifaces[key]['up']:
 				devices += self.scanNetwork(iNetwork.ifaces[key]['ip'], iNetwork.ifaces[key]['netmask'])
-				
+
 		print "[GBIpboxClient] network scan completed. Found " + str(len(devices)) + " devices"
 		return devices
-		
+
 	def ipRange(self, start_ip, end_ip):
 		temp = start_ip
 		ip_range = []
@@ -91,7 +91,7 @@ class GBIpboxScan:
 		for octet in netmask:
 			binary_str += bin(int(octet))[2:].zfill(8)
 		return len(binary_str.rstrip('0'))
-		
+
 	def getBoxName(self, ipaddress):
 		try:
 			httprequest = urllib2.urlopen('http://' + ipaddress + '/web/about', timeout=5)
@@ -100,7 +100,7 @@ class GBIpboxScan:
 		except Exception:
 			pass
 		return None
-	
+
 	def scanNetwork(self, ipaddress, subnet):
 		print "[GBIpboxClient] scan interface with ip address", ipaddress, "and subnet", subnet
 		cidr = self.getNetSize(subnet)
@@ -108,7 +108,7 @@ class GBIpboxScan:
 		startip = []
 		for i in range(4):
 			startip.append(int(ipaddress[i]) & int(subnet[i]))
-	
+
 		endip = list(startip)
 		brange = 32 - cidr
 		for i in range(brange):
@@ -122,7 +122,7 @@ class GBIpboxScan:
 		endip[3] -= 1
 
 		print "[GBIpboxClient] scan from ip", startip, "to", endip
-		
+
 		threads = []
 		threads_completed = []
 		for iptoscan in self.ipRange(startip, endip):
@@ -130,15 +130,15 @@ class GBIpboxScan:
 				scanhost = threads.pop(0)
 				scanhost.join()
 				threads_completed.append(scanhost)
-				
+
 			scanhost = ScanHost(iptoscan, 80)
 			scanhost.start()
 			threads.append(scanhost)
-		
+
 		for scanhost in threads:
 			scanhost.join()
 			threads_completed.append(scanhost)
-			
+
 		devices = []
 		for scanhost in threads_completed:
 			if scanhost.isopen:

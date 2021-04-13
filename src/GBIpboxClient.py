@@ -36,14 +36,13 @@ timerinstance = None
 def GBIpboxClient(session, **kwargs):
 	global timerinstance
 	session.open(GBIpboxMenu, timerinstance)
-	
+
 
 def GBIpboxClientAutostart(reason, session=None, **kwargs):
 	global timerinstance
 	timerinstance = GBIpboxTimer(session)
-	
+
 	#InfoBarTimeshift.ts_disabled = True
-	
+
 	mount = GBIpboxMount(session)
 	mount.automount()
-	
