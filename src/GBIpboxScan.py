@@ -40,7 +40,7 @@ class ScanHost(threading.Thread):
 		self.isopen = False
 
 	def run(self):
-		serverip  = socket.gethostbyname(self.ipaddress)
+		serverip = socket.gethostbyname(self.ipaddress)
 
 		try:
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -79,7 +79,7 @@ class GBIpboxScan:
 			for i in (3, 2, 1):
 				if temp[i] == 256:
 					temp[i] = 0
-					temp[i-1] += 1
+					temp[i - 1] += 1
 			ip_range.append(".".join(map(str, temp)))
 
 		return ip_range
@@ -110,7 +110,7 @@ class GBIpboxScan:
 		endip = list(startip)
 		brange = 32 - cidr
 		for i in range(brange):
-			endip[3 - i/8] = endip[3 - i/8] + (1 << (i % 8))
+			endip[3 - i / 8] = endip[3 - i / 8] + (1 << (i % 8))
 
 		if startip[0] == 0:	# if start with 0, we suppose the interface is not properly configured
 			print "[GBIpboxClient] your start ip address seem invalid. Skip interface scan."

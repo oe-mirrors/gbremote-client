@@ -176,12 +176,12 @@ class GBIpboxRemoteTimer():
 						et = localtime(end)
 						bday = bt.tm_wday
 						begin2 = bday * 1440 + bt.tm_hour * 60 + bt.tm_min
-						end2   = et.tm_wday * 1440 + et.tm_hour * 60 + et.tm_min
+						end2 = et.tm_wday * 1440 + et.tm_hour * 60 + et.tm_min
 					if x.repeated & (1 << bday):
 						xbt = localtime(x.begin)
 						xet = localtime(timer_end)
 						xbegin = bday * 1440 + xbt.tm_hour * 60 + xbt.tm_min
-						xend   = bday * 1440 + xet.tm_hour * 60 + xet.tm_min
+						xend = bday * 1440 + xet.tm_hour * 60 + xet.tm_min
 						if xend < xbegin:
 							xend += 1440
 						if begin2 < xbegin <= end2:
