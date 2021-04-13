@@ -214,7 +214,7 @@ class GBIpboxRemoteTimer():
 							time_match = end - begin
 							type = type_offset + 2
 				if time_match:
-					if type in (2,7,12): # When full recording do not look further
+					if type in (2, 7, 12): # When full recording do not look further
 						returnValue = (time_match, [type], isAutoTimer)
 						break
 					elif returnValue:
@@ -259,7 +259,7 @@ class GBIpboxRemoteTimer():
 		self.getTimers()
 
 		if not success:
-			timersanitycheck = TimerSanityCheck(self._timer_list,entry)
+			timersanitycheck = TimerSanityCheck(self._timer_list, entry)
 			if not timersanitycheck.check():
 				print "timer conflict detected!"
 				print timersanitycheck.getSimulTimerList()
@@ -301,7 +301,7 @@ class GBIpboxRemoteTimer():
 		self.getTimers()
 
 		if not success:
-			timersanitycheck = TimerSanityCheck(self._timer_list,entry)
+			timersanitycheck = TimerSanityCheck(self._timer_list, entry)
 			if not timersanitycheck.check():
 				print "timer conflict detected!"
 				print timersanitycheck.getSimulTimerList()
