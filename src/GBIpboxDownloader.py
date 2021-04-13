@@ -62,7 +62,7 @@ class GBIpboxDownloader:
 		print "[GBIpboxClient] web interface url: " + baseurl
 		print "[GBIpboxClient] streaming url: " + streamingurl
 
-		for stype in [ "tv", "radio" ]:
+		for stype in ["tv", "radio"]:
 			print "[GBIpboxClient] download " + stype + " bouquets from " + baseurl
 			bouquets = self.downloadBouquets(baseurl, stype)
 			print "[GBIpboxClient] save " + stype + " bouquets from " + streamingurl
