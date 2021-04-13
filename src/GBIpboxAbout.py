@@ -29,6 +29,7 @@ from Components.Label import Label
 from GBIpboxLocale import _
 from boxbranding import getImageDistro
 
+
 class GBIpboxAbout(Screen):
 	skin = """
 			<screen position="360,150" size="560,400">

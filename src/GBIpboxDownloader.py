@@ -32,12 +32,14 @@ import urllib2
 import re
 import os
 
+
 def getValueFromNode(event, key):
 	tmp = event.getElementsByTagName(key)[0].firstChild
 	if (tmp):
 		return str(tmp.nodeValue)
 
 	return ""
+
 
 class GBIpboxDownloader:
 	def __init__(self, session):

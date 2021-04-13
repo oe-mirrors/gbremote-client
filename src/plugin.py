@@ -44,8 +44,10 @@ config.ipboxclient.repeattype = ConfigSelection(default="daily", choices=[("dail
 config.ipboxclient.mounthdd = ConfigYesNo(default=False)
 config.ipboxclient.remotetimers = ConfigYesNo(default=False)
 
+
 def ipboxclientRecordTimer():
 	return GBIpboxRemoteTimer()
+
 
 def ipboxclientStart(menuid, **kwargs):
 	if getImageDistro() in ("openatv"):
@@ -58,6 +60,7 @@ def ipboxclientStart(menuid, **kwargs):
 	else:
 		return []
 
+
 def getHasTuners():
 	if fileExists("/proc/bus/nim_sockets"):
 		nimfile = open("/proc/bus/nim_sockets")
@@ -65,6 +68,7 @@ def getHasTuners():
 		nimfile.close()
 		return len(data) > 0
 	return False
+
 
 def Plugins(**kwargs):
 	if getImageDistro() in ("openatv"):
