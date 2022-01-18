@@ -1,3 +1,4 @@
+from __future__ import print_function
 #############################################################################
 #
 # Copyright (C) 2014 Impex-Sat Gmbh & Co.KG
@@ -91,7 +92,7 @@ class GBIpboxRemoteTimer():
 
 		baseurl = self.getBaseUrl()
 
-		print "[GBIpboxRemoteTimer] get remote timer list"
+		print("[GBIpboxRemoteTimer] get remote timer list")
 
 		try:
 			httprequest = urllib2.urlopen(baseurl + '/web/timerlist')
@@ -121,8 +122,8 @@ class GBIpboxRemoteTimer():
 					insort(self._processed_timers, entry)
 				else:
 					insort(self._timer_list, entry)
-		except Exception, e:
-			print "[GBIpboxRemoteTimer]", e
+		except Exception as e:
+			print("[GBIpboxRemoteTimer]", e)
 
 		self.last_update_ts = time()
 
@@ -228,7 +229,7 @@ class GBIpboxRemoteTimer():
 		return returnValue
 
 	def record(self, entry, ignoreTSC=False, dosave=True):
-		print "[GBIpboxRemoteTimer] record ", str(entry)
+		print("[GBIpboxRemoteTimer] record ", str(entry))
 
 		entry.service_ref = ServiceReference(":".join(str(entry.service_ref).split(":")[:10]))
 		args = urllib.urlencode({
@@ -247,15 +248,15 @@ class GBIpboxRemoteTimer():
 
 		baseurl = self.getBaseUrl()
 
-		print "[GBIpboxRemoteTimer] web interface url: " + baseurl
+		print("[GBIpboxRemoteTimer] web interface url: " + baseurl)
 
 		try:
 			httprequest = urllib2.urlopen(baseurl + '/web/timeradd?' + args)
 			xmldoc = minidom.parseString(httprequest.read())
 			status = xmldoc.getElementsByTagName('e2simplexmlresult')[0]
 			success = getValueFromNode(status, 'e2state') == "True"
-		except Exception, e:
-			print "[GBIpboxRemoteTimer]", e
+		except Exception as e:
+			print("[GBIpboxRemoteTimer]", e)
 			return None
 
 		self.getTimers()
@@ -263,14 +264,14 @@ class GBIpboxRemoteTimer():
 		if not success:
 			timersanitycheck = TimerSanityCheck(self._timer_list, entry)
 			if not timersanitycheck.check():
-				print "timer conflict detected!"
-				print timersanitycheck.getSimulTimerList()
+				print("timer conflict detected!")
+				print(timersanitycheck.getSimulTimerList())
 				return timersanitycheck.getSimulTimerList()
 
 		return None
 
 	def timeChanged(self, entry):
-		print "[GBIpboxRemoteTimer] timer changed ", str(entry)
+		print("[GBIpboxRemoteTimer] timer changed ", str(entry))
 
 		entry.service_ref = ServiceReference(":".join(str(entry.service_ref).split(":")[:10]))
 		try:
@@ -296,8 +297,8 @@ class GBIpboxRemoteTimer():
 			xmldoc = minidom.parseString(httprequest.read())
 			status = xmldoc.getElementsByTagName('e2simplexmlresult')[0]
 			success = getValueFromNode(status, 'e2state') == "True"
-		except Exception, e:
-			print "[GBIpboxRemoteTimer]", e
+		except Exception as e:
+			print("[GBIpboxRemoteTimer]", e)
 			return None
 
 		self.getTimers()
@@ -305,14 +306,14 @@ class GBIpboxRemoteTimer():
 		if not success:
 			timersanitycheck = TimerSanityCheck(self._timer_list, entry)
 			if not timersanitycheck.check():
-				print "timer conflict detected!"
-				print timersanitycheck.getSimulTimerList()
+				print("timer conflict detected!")
+				print(timersanitycheck.getSimulTimerList())
 				return timersanitycheck.getSimulTimerList()
 
 		return None
 
 	def removeEntry(self, entry):
-		print "[GBIpboxRemoteTimer] timer remove ", str(entry)
+		print("[GBIpboxRemoteTimer] timer remove ", str(entry))
 
 		entry.service_ref = ServiceReference(":".join(str(entry.service_ref).split(":")[:10]))
 		args = urllib.urlencode({
@@ -325,8 +326,8 @@ class GBIpboxRemoteTimer():
 		try:
 			httprequest = urllib2.urlopen(baseurl + '/web/timerdelete?' + args)
 			httprequest.read()
-		except Exception, e:
-			print "[GBIpboxRemoteTimer]", e
+		except Exception as e:
+			print("[GBIpboxRemoteTimer]", e)
 			return
 
 		self.getTimers()

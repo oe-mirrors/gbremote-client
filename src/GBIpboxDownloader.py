@@ -61,25 +61,25 @@ class GBIpboxDownloader:
 		baseurl += str(config.ipboxclient.port.value)
 		streamingurl += str(config.ipboxclient.streamport.value)
 
-		print "[GBIpboxClient] web interface url: " + baseurl
-		print "[GBIpboxClient] streaming url: " + streamingurl
+		print("[GBIpboxClient] web interface url: " + baseurl)
+		print("[GBIpboxClient] streaming url: " + streamingurl)
 
 		for stype in ["tv", "radio"]:
-			print "[GBIpboxClient] download " + stype + " bouquets from " + baseurl
+			print("[GBIpboxClient] download " + stype + " bouquets from " + baseurl)
 			bouquets = self.downloadBouquets(baseurl, stype)
-			print "[GBIpboxClient] save " + stype + " bouquets from " + streamingurl
+			print("[GBIpboxClient] save " + stype + " bouquets from " + streamingurl)
 			self.saveBouquets(bouquets, streamingurl, '/etc/enigma2/bouquets.' + stype)
 
-		print "[GBIpboxClient] reload bouquets"
+		print("[GBIpboxClient] reload bouquets")
 		self.reloadBouquets()
 
-		print "[GBIpboxClient] sync EPG"
+		print("[GBIpboxClient] sync EPG")
 		self.downloadEPG(baseurl)
 
-		print "[GBIpboxClient] sync parental control"
+		print("[GBIpboxClient] sync parental control")
 		self.downloadParentalControl(baseurl)
 
-		print "[GBIpboxClient] sync is done!"
+		print("[GBIpboxClient] sync is done!")
 
 	def getSetting(self, baseurl, key):
 		httprequest = urllib2.urlopen(baseurl + '/web/settings')
@@ -129,7 +129,7 @@ class GBIpboxDownloader:
 	def downloadBouquets(self, baseurl, stype):
 		bouquets = []
 		httprequest = urllib2.urlopen(baseurl + '/web/bouquets?stype=' + stype)
-		print "[GBIpboxClient] download bouquets from " + baseurl + '/web/bouquets?stype=' + stype
+		print("[GBIpboxClient] download bouquets from " + baseurl + '/web/bouquets?stype=' + stype)
 		xmldoc = minidom.parseString(httprequest.read())
 		services = xmldoc.getElementsByTagName('e2service')
 		for service in services:
@@ -164,7 +164,7 @@ class GBIpboxDownloader:
 	def saveBouquets(self, bouquets, streamingurl, destinationfile):
 		bouquetsfile = open(destinationfile, "w")
 		bouquetsfile.write("#NAME Bouquets (TV)" + "\n")
-		print "[GBIpboxClient] streamurl " + streamingurl
+		print("[GBIpboxClient] streamurl " + streamingurl)
 		for bouquet in bouquets:
 			pattern = r'"([A-Za-z0-9_\./\\-]*)"'
 			m = re.search(pattern, bouquet['reference'])
@@ -204,65 +204,65 @@ class GBIpboxDownloader:
 		db.reloadBouquets()
 
 	def downloadEPG(self, baseurl):
-		print "[GBIpboxClient] reading remote EPG location ..."
+		print("[GBIpboxClient] reading remote EPG location ...")
 		filename = self.getEPGLocation(baseurl)
 		if not filename:
-			print "[GBIpboxClient] error downloading remote EPG location. Skip EPG sync."
+			print("[GBIpboxClient] error downloading remote EPG location. Skip EPG sync.")
 			return
 
-		print "[GBIpboxClient] remote EPG found at " + filename
+		print("[GBIpboxClient] remote EPG found at " + filename)
 
-		print "[GBIpboxClient] dump remote EPG to epg.dat"
+		print("[GBIpboxClient] dump remote EPG to epg.dat")
 		httprequest = urllib2.urlopen(baseurl + '/web/saveepg')
 
 		httprequest = urllib2.urlopen(baseurl + '/file?action=download&file=' + urllib.quote(filename))
 		data = httprequest.read()
 		if not data:
-			print "[GBIpboxClient] cannot download remote EPG. Skip EPG sync."
+			print("[GBIpboxClient] cannot download remote EPG. Skip EPG sync.")
 			return
 
 		try:
 			epgfile = open(config.misc.epgcache_filename.value, "w")
 		except Exception:
-			print "[GBIpboxClient] cannot save EPG. Skip EPG sync."
+			print("[GBIpboxClient] cannot save EPG. Skip EPG sync.")
 			return
 
 		epgfile.write(data)
 		epgfile.close()
 
-		print "[GBIpboxClient] reload EPG"
+		print("[GBIpboxClient] reload EPG")
 		epgcache = eEPGCache.getInstance()
 		epgcache.load()
 
 	def downloadParentalControl(self, baseurl):
-		print "[GBIpboxClient] reading remote parental control status ..."
+		print("[GBIpboxClient] reading remote parental control status ...")
 
 		if self.getParentalControlEnabled(baseurl):
-			print "[GBIpboxClient] parental control enabled"
+			print("[GBIpboxClient] parental control enabled")
 			config.ParentalControl.servicepinactive.value = True
 			config.ParentalControl.servicepinactive.save()
-			print "[GBIpboxClient] reding pin status ..."
+			print("[GBIpboxClient] reding pin status ...")
 			pinstatus = self.getParentalControlPinState(baseurl)
 			pin = self.getParentalControlPin(baseurl)
-			print "[GBIpboxClient] pin status is setted to " + str(pinstatus)
+			print("[GBIpboxClient] pin status is setted to " + str(pinstatus))
 			config.ParentalControl.servicepinactive.value = pinstatus
 			config.ParentalControl.servicepinactive.save()
 			config.ParentalControl.servicepin[0].value = pin
 			config.ParentalControl.servicepin[0].save()
-			print "[GBIpboxClient] reading remote parental control type ..."
+			print("[GBIpboxClient] reading remote parental control type ...")
 			stype = self.getParentalControlType(baseurl)
-			print "[GBIpboxClient] parental control type is " + stype
+			print("[GBIpboxClient] parental control type is " + stype)
 			config.ParentalControl.type.value = stype
 			config.ParentalControl.type.save()
-			print "[GBIpboxClient] download parental control services list"
+			print("[GBIpboxClient] download parental control services list")
 			services = self.downloadParentalControlBouquets(baseurl)
-			print "[GBIpboxClient] save parental control services list"
+			print("[GBIpboxClient] save parental control services list")
 			parentalfile = open("/etc/enigma2/" + stype, "w")
 			for service in services:
 				parentalfile.write(service['reference'] + "\n")
 			parentalfile.close()
-			print "[GBIpboxClient] reload parental control"
+			print("[GBIpboxClient] reload parental control")
 			from Components.ParentalControl import parentalControl
 			parentalControl.open()
 		else:
-			print "[GBIpboxClient] parental control disabled - do nothing"
+			print("[GBIpboxClient] parental control disabled - do nothing")

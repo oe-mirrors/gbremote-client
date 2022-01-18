@@ -62,13 +62,13 @@ class GBIpboxScan:
 		self.session = session
 
 	def scan(self):
-		print "[GBIpboxClient] network scan started"
+		print("[GBIpboxClient] network scan started")
 		devices = []
 		for key in iNetwork.ifaces:
 			if iNetwork.ifaces[key]['up']:
 				devices += self.scanNetwork(iNetwork.ifaces[key]['ip'], iNetwork.ifaces[key]['netmask'])
 
-		print "[GBIpboxClient] network scan completed. Found " + str(len(devices)) + " devices"
+		print("[GBIpboxClient] network scan completed. Found " + str(len(devices)) + " devices")
 		return devices
 
 	def ipRange(self, start_ip, end_ip):
@@ -102,7 +102,7 @@ class GBIpboxScan:
 		return None
 
 	def scanNetwork(self, ipaddress, subnet):
-		print "[GBIpboxClient] scan interface with ip address", ipaddress, "and subnet", subnet
+		print("[GBIpboxClient] scan interface with ip address", ipaddress, "and subnet", subnet)
 		cidr = self.getNetSize(subnet)
 
 		startip = []
@@ -115,13 +115,13 @@ class GBIpboxScan:
 			endip[3 - i / 8] = endip[3 - i / 8] + (1 << (i % 8))
 
 		if startip[0] == 0:	# if start with 0, we suppose the interface is not properly configured
-			print "[GBIpboxClient] your start ip address seem invalid. Skip interface scan."
+			print("[GBIpboxClient] your start ip address seem invalid. Skip interface scan.")
 			return []
 
 		startip[3] += 1
 		endip[3] -= 1
 
-		print "[GBIpboxClient] scan from ip", startip, "to", endip
+		print("[GBIpboxClient] scan from ip", startip, "to", endip)
 
 		threads = []
 		threads_completed = []
@@ -142,11 +142,11 @@ class GBIpboxScan:
 		devices = []
 		for scanhost in threads_completed:
 			if scanhost.isopen:
-				print "[GBIpboxClient] device with ip " + scanhost.ipaddress + " listen on port 80, check if it's enigma2"
+				print("[GBIpboxClient] device with ip " + scanhost.ipaddress + " listen on port 80, check if it's enigma2")
 				boxname = self.getBoxName(scanhost.ipaddress)
 				if boxname:
-					print "[GBIpboxClient] found " + boxname + " on ip " + scanhost.ipaddress
+					print("[GBIpboxClient] found " + boxname + " on ip " + scanhost.ipaddress)
 					devices.append((str(boxname), scanhost.ipaddress))
 				else:
-					print "[GBIpboxClient] no enigma2 found. Skip host"
+					print("[GBIpboxClient] no enigma2 found. Skip host")
 		return devices
