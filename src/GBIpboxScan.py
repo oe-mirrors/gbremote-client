@@ -116,7 +116,7 @@ class GBIpboxScan:
 		endip = list(startip)
 		brange = 32 - cidr
 		for i in range(brange):
-			endip[3 - i / 8] = endip[3 - i / 8] + (1 << (i % 8))
+			endip[3 - i // 8] = endip[3 - i // 8] + (1 << (i % 8))
 
 		if startip[0] == 0:	# if start with 0, we suppose the interface is not properly configured
 			print("[GBIpboxClient] your start ip address seem invalid. Skip interface scan.")
