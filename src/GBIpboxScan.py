@@ -26,8 +26,11 @@ from .GBIpboxLocale import _
 
 import socket
 import threading
-import urllib
-import urllib2
+
+try:
+	from urllib.request import urlopen
+except ImportError:
+	from urllib2 import urlopen
 
 from xml.dom import minidom
 
@@ -95,7 +98,7 @@ class GBIpboxScan:
 
 	def getBoxName(self, ipaddress):
 		try:
-			httprequest = urllib2.urlopen('http://' + ipaddress + '/web/about', timeout=5)
+			httprequest = urlopen('http://' + ipaddress + '/web/about', timeout=5)
 			xmldoc = minidom.parseString(httprequest.read())
 			return xmldoc.getElementsByTagName('e2model')[0].firstChild.nodeValue
 		except Exception:
