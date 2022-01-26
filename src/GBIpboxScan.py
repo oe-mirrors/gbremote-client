@@ -20,8 +20,9 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Components.Network import iNetwork
-from GBIpboxLocale import _
+from .GBIpboxLocale import _
 
 import socket
 import threading

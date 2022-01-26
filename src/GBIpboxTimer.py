@@ -20,10 +20,11 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Components.config import config
 
-from GBIpboxDownloader import GBIpboxDownloader
-from GBIpboxLocale import _
+from .GBIpboxDownloader import GBIpboxDownloader
+from .GBIpboxLocale import _
 
 from enigma import eTimer
 

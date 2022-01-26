@@ -21,13 +21,14 @@ from __future__ import print_function
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Components.config import config
 from Components.TimerSanityCheck import TimerSanityCheck
 from RecordTimer import RecordTimerEntry, AFTEREVENT
 from ServiceReference import ServiceReference
 from timer import TimerEntry
 
-from GBIpboxLocale import _
+from .GBIpboxLocale import _
 
 from xml.dom import minidom
 from time import localtime, strftime, ctime, time

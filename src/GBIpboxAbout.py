@@ -20,13 +20,14 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 
-from GBIpboxLocale import _
+from .GBIpboxLocale import _
 from boxbranding import getImageDistro
 
 
