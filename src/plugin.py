@@ -51,7 +51,7 @@ def ipboxclientRecordTimer():
 
 
 def ipboxclientStart(menuid, **kwargs):
-	if getImageDistro() in ("openatv"):
+	if getImageDistro() in ("openatv", "openbh"):
 		if menuid == "scan":
 			return [(_("IPBOX Client"), GBIpboxClient, "ipbox_client_Start", 13)]
 		else:
@@ -72,7 +72,7 @@ def getHasTuners():
 
 
 def Plugins(**kwargs):
-	if getImageDistro() in ("openatv"):
+	if getImageDistro() in ("openatv", "openbh"):
 		list = [
 			PluginDescriptor(
 				where=PluginDescriptor.WHERE_SESSIONSTART,
@@ -113,7 +113,7 @@ def Plugins(**kwargs):
 			fnc=ipboxclientRecordTimer
 		))
 
-	if not config.ipboxclient.firstconf.value and getHasTuners() == False and not getImageDistro() in ("openatv"):
+	if not config.ipboxclient.firstconf.value and getHasTuners() == False and not getImageDistro() in ("openatv", "openbh"):
 		list.append(PluginDescriptor(
 			name=_("IPBox wizard"),
 			where=PluginDescriptor.WHERE_WIZARD,
