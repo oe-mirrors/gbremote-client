@@ -20,6 +20,7 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Screens.Wizard import Wizard
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
@@ -28,10 +29,10 @@ from Components.config import config
 
 from Tools import Directories
 
-from GBIpboxDownloader import GBIpboxDownloader
-from GBIpboxScan import GBIpboxScan
-from GBIpboxMount import GBIpboxMount
-from GBIpboxLocale import _
+from .GBIpboxDownloader import GBIpboxDownloader
+from .GBIpboxScan import GBIpboxScan
+from .GBIpboxMount import GBIpboxMount
+from .GBIpboxLocale import _
 
 from enigma import eTimer
 

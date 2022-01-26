@@ -20,14 +20,15 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigClock, ConfigSelection
 from Tools.Directories import fileExists
-from GBIpboxClient import GBIpboxClient, GBIpboxClientAutostart
-from GBIpboxRemoteTimer import GBIpboxRemoteTimer
-from GBIpboxWizard import GBIpboxWizard
-from GBIpboxLocale import _
+from .GBIpboxClient import GBIpboxClient, GBIpboxClientAutostart
+from .GBIpboxRemoteTimer import GBIpboxRemoteTimer
+from .GBIpboxWizard import GBIpboxWizard
+from .GBIpboxLocale import _
 from boxbranding import getImageDistro
 
 config.ipboxclient = ConfigSubsection()

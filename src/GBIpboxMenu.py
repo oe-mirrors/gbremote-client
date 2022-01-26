@@ -20,6 +20,7 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
@@ -31,11 +32,11 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 
-from GBIpboxDownloader import GBIpboxDownloader
-from GBIpboxScan import GBIpboxScan
-from GBIpboxAbout import GBIpboxAbout
-from GBIpboxMount import GBIpboxMount
-from GBIpboxLocale import _
+from .GBIpboxDownloader import GBIpboxDownloader
+from .GBIpboxScan import GBIpboxScan
+from .GBIpboxAbout import GBIpboxAbout
+from .GBIpboxMount import GBIpboxMount
+from .GBIpboxLocale import _
 from boxbranding import getImageDistro
 
 from enigma import eTimer

@@ -20,13 +20,14 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarTimeshift
 
-from GBIpboxMenu import GBIpboxMenu
-from GBIpboxTimer import GBIpboxTimer
-from GBIpboxMount import GBIpboxMount
-from GBIpboxLocale import _
+from .GBIpboxMenu import GBIpboxMenu
+from .GBIpboxTimer import GBIpboxTimer
+from .GBIpboxMount import GBIpboxMount
+from .GBIpboxLocale import _
 
 import os
 

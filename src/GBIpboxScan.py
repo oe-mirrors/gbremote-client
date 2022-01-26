@@ -20,13 +20,17 @@
 #
 #############################################################################
 
+from __future__ import absolute_import
 from Components.Network import iNetwork
-from GBIpboxLocale import _
+from .GBIpboxLocale import _
 
 import socket
 import threading
-import urllib
-import urllib2
+
+try:
+	from urllib.request import urlopen
+except ImportError:
+	from urllib2 import urlopen
 
 from xml.dom import minidom
 
@@ -94,7 +98,7 @@ class GBIpboxScan:
 
 	def getBoxName(self, ipaddress):
 		try:
-			httprequest = urllib2.urlopen('http://' + ipaddress + '/web/about', timeout=5)
+			httprequest = urlopen('http://' + ipaddress + '/web/about', timeout=5)
 			xmldoc = minidom.parseString(httprequest.read())
 			return xmldoc.getElementsByTagName('e2model')[0].firstChild.nodeValue
 		except Exception:
@@ -112,7 +116,7 @@ class GBIpboxScan:
 		endip = list(startip)
 		brange = 32 - cidr
 		for i in range(brange):
-			endip[3 - i / 8] = endip[3 - i / 8] + (1 << (i % 8))
+			endip[3 - i // 8] = endip[3 - i // 8] + (1 << (i % 8))
 
 		if startip[0] == 0:	# if start with 0, we suppose the interface is not properly configured
 			print("[GBIpboxClient] your start ip address seem invalid. Skip interface scan.")
